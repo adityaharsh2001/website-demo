@@ -1,0 +1,183 @@
+
+<ng-template #content let-modal>
+
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Team</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button> 
+    </div>
+    <div class="modal-body slide-in-fwd-center">
+     
+  
+      <form  class="form-group" id="formLogin" name="formLogin" role="form">
+        <div class="form-group">
+          <label for="uname1">Name of person</label> 
+          <input class="form-control" id="uname1" name="uname1" required="" type="text">
+        </div>
+        <div class="form-group">
+          <label>Profession</label> 
+          <input  class="form-control" id="pwd1" required="" type="text">
+        </div>
+  
+        <div class="form-group">
+          <label>Lecture Title</label> 
+          <input  class="form-control" id="pwd1" required="" type="text">
+        </div>
+  
+        <label for="dateOfBirth">Date</label>
+          <!-- <input  class="form-control"   ngbDatepicker > -->
+          <div><input  class="form-control" id="dateOfBirth" name="dp" required="" ngbDatepicker #dp="ngbDatepicker" type="datetime" style="width: fit-content;
+            display: inline-flex;">
+            <button class="btn btn-outline-secondary calendar"  (click)="dp.toggle()" type="button"><span class="material-icons">
+            today
+            </span></button></div>
+        
+        <div class="form-group">
+          <label>Status</label> 
+          <input  class="form-control" id="pwd1" required="" type="text">
+        </div>
+  
+        <div class="form-group">
+          <label>Registration Link</label> 
+          <input  class="form-control" id="pwd1" required="" type="text">
+        </div>
+  
+       
+       
+        <!-- <button class="btn btn-success btn-lg float-right" type="button">Login</button> -->
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success btn-lg float-right" (click)="modal.close('Save click')">Save</button>
+    </div>
+  
+</ng-template>
+
+<!-- <button mat-raised-button color="primary" (click)="open(content)">Add Lecture</button> -->
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title" style="text-align: center;">Team List</h4>
+      </div>
+     <div><button mat-raised-button color="primary" class="add-btn" (click)="open(content)"><span class="material-icons">
+        add_circle
+        </span> Add Team</button></div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Name
+              </th>
+              <th>
+                Profession
+              </th>
+              <th>
+                Lecture Title
+              </th>
+              <th>
+                Date
+              </th>
+              <th>
+                Status
+              </th>
+              <th>
+                Registration Link
+              </th>
+              <th>
+                Extra
+              </th>
+              <th>
+                Action
+              </th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  Demo Data
+              </td>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  <button mat-raised-button color="primary" style="margin: 5px;">
+                    <span class="material-icons">
+                    edit
+                    </span>
+                  </button>    
+                  <button mat-raised-button color="warn" style="margin: 5px;">
+                    <span class="material-icons">
+                    delete
+                    </span>
+                  </button>
+
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  Demo Data
+                </td>
+                <td>
+                  Demo Data
+                </td>
+                  <td>
+                    <button mat-raised-button color="primary" style="margin: 5px;">
+                      <span class="material-icons">
+                      edit
+                      </span>
+                    </button>    
+                    <button mat-raised-button color="warn" style="margin: 5px;">
+                      <span class="material-icons">
+                      delete
+                      </span>
+                    </button>
+  
+  
+                  </td>               
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
