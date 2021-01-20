@@ -4,6 +4,8 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 
+import { Lecture } from "./lecture.model";
+import { LecturesService } from "./lecture.service";
 
 @Component({
   moduleId: module.id,
@@ -12,21 +14,22 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
   styleUrls: ['lectures.component.css']
 
 })
+
 export class LecturesComponent implements OnInit {
   closeResult = '';
   status = "upcoming";
   form: FormGroup;
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, public lecturesService: LecturesService,) {}
 
 
   Upcoming(){
    this.status = "upcoming"
 
-    console.log("upcoming");
+    // console.log("upcoming");
   }
   Done(){
     this.status = "done";
-    console.log("done");
+    // console.log("done");
   }
 
 
@@ -46,13 +49,13 @@ export class LecturesComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
-    console.log("open");
+    // console.log("open");
   }
 
 
   ngOnInit(): void
   {
-    console.log("init");
+    // console.log("init");
     this.status = "upcoming"
     this.form = new FormGroup(
       {
@@ -60,17 +63,32 @@ export class LecturesComponent implements OnInit {
           validators: [Validators.required, Validators.minLength(3)]
         }),
         profession: new FormControl(null, {validators: [Validators.required]}),
-        lecture_title: new FormControl(null, {validators: [Validators.required]}),
+        lectureTitle: new FormControl(null, {validators: [Validators.required]}),
         date: new FormControl(null, {validators: [Validators.required]}),
-        registration_link: new FormControl(null, {validators: [Validators.required]}),
+        regLink: new FormControl(null, {validators: [Validators.required]}),
       }
     )
 
   }
   onSaveLecture(){
-    console.log(this.form.value);
-    // console.log("daf;jdaf");
-    console.log(this.form.value.name);
+    // console.log(this.form.value);
+
+
+    // console.log(this.form.value.name);
+
+    let lecture = {
+      "_id": null,
+      "name": this.form.value.name,
+      "profession": this.form.value.profession,
+      "date": this.form.value.date,
+      "regLink": this.form.value.regLink,
+      "status":this.status,
+      "lectureTitle": this.form.value.lectureTitle
+    }
+    // console.log(this.form.value.regLink)
+    // console.log(this.form.value.lectureTitle)
+    this.lecturesService.addPost(lecture);
+
   }
 }
 
