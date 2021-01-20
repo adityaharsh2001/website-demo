@@ -53,9 +53,8 @@ export class LecturesService {
     lectureData.append("regLink", lecture.regLink);
     lectureData.append("status", (lecture.status).toString());
 
-     console.log(lecture);
-     console.log(lectureData);
-
+    console.log(lecture);
+    console.log(lectureData);
 
 
     // // postData.append("image", image, title);
@@ -72,7 +71,6 @@ export class LecturesService {
           profession: responseData.lecture.profession,
           regLink: responseData.lecture.regLink,
           status: responseData.lecture.status
-
         };
         // console.log(lecture);
     this.lectures.push(lecture);

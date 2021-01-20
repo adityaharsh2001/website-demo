@@ -70,10 +70,10 @@ export class LecturesComponent implements OnInit {
     )
 
   }
-  onSaveLecture(){
+  onSaveLecture(event: Event){
     // console.log(this.form.value);
 
-
+    event.preventDefault();
     // console.log(this.form.value.name);
 
     let lecture = {
@@ -82,11 +82,12 @@ export class LecturesComponent implements OnInit {
       "profession": this.form.value.profession,
       "date": this.form.value.date,
       "regLink": this.form.value.regLink,
-      "status":this.status,
+      "status": true,
       "lectureTitle": this.form.value.lectureTitle
     }
     // console.log(this.form.value.regLink)
     // console.log(this.form.value.lectureTitle)
+    console.log(this.form);
     this.lecturesService.addPost(lecture);
 
   }
