@@ -10,7 +10,8 @@
     <div class="modal-body slide-in-fwd-center">
 
 
-      <form [formGroup]="form" class="form-group" id="formLogin" name="formLogin" role="form" (submit) = "onSaveLecture()">
+      <!-- <form [formGroup]="form" class="form-group" id="formLogin" name="formLogin" role="form" (submit) = "onSaveLecture()"> -->
+      <form [formGroup]="form" class="form-group" id="formLogin" name="formLogin" role="form">
         <div class="form-group">
           <label for="uname1">Name of person</label>
           <input formControlName="name" class="form-control" id="uname1" name="uname1" required="" type="text">
@@ -53,7 +54,7 @@
 
 
         <div class="modal-footer">
-          <button  type="button" class="btn btn-success btn-lg float-right" type= "submit" (click)="modal.close('Save click')">Save</button>
+          <button  class="btn btn-success btn-lg float-right" type= "submit" (click)="modal.close('Save click'); onSaveLecture()">Save</button>
         </div>
         <!-- <button class="btn btn-success btn-lg float-right" type="button">Login</button> -->
       </form>

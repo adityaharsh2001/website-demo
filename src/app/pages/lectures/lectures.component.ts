@@ -21,6 +21,7 @@ export class LecturesComponent implements OnInit {
 
   Upcoming(){
    this.status = "upcoming"
+
     console.log("upcoming");
   }
   Done(){
@@ -45,11 +46,13 @@ export class LecturesComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+    console.log("open");
   }
 
 
   ngOnInit(): void
   {
+    console.log("init");
     this.status = "upcoming"
     this.form = new FormGroup(
       {
@@ -66,7 +69,7 @@ export class LecturesComponent implements OnInit {
   }
   onSaveLecture(){
     console.log(this.form.value);
-    // console.log(this.form.name);
+    // console.log("daf;jdaf");
     console.log(this.form.value.name);
   }
 }

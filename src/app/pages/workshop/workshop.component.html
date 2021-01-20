@@ -3,26 +3,26 @@
       <h4 class="modal-title" id="modal-basic-title">Add Workshop</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
-      </button> 
+      </button>
     </div>
     <div class="modal-body">
-     
-  
-      <form  class="form-group" id="formLogin" name="formLogin" role="form">
+
+
+      <form  class="form-group"  id="formLogin" name="formLogin" role="form">
         <div class="form-group">
-          <label for="uname1">Name of person</label> 
+          <label for="uname1">Name of person</label>
           <input class="form-control" id="uname1" name="uname1" required="" type="text">
         </div>
         <div class="form-group">
-          <label>Profession</label> 
+          <label>Profession</label>
           <input  class="form-control" id="pwd1" required="" type="text">
         </div>
-  
+
         <div class="form-group">
-          <label>Lecture Title</label> 
+          <label>Lecture Title</label>
           <input  class="form-control" id="pwd1" required="" type="text">
         </div>
-  
+
         <label for="dateOfBirth">Date</label>
           <!-- <input  class="form-control"   ngbDatepicker > -->
           <div><input  class="form-control" id="dateOfBirth" name="dp" required="" ngbDatepicker #dp="ngbDatepicker" type="datetime" style="width: fit-content;
@@ -30,19 +30,19 @@
             <button class="btn btn-outline-secondary calendar"  (click)="dp.toggle()" type="button"><span class="material-icons">
             today
             </span></button></div>
-        
+
         <div class="form-group">
-          <label>Status</label> 
+          <label>Status</label>
           <input  class="form-control" id="pwd1" required="" type="text">
         </div>
-  
+
         <div class="form-group">
-          <label>Registration Link</label> 
+          <label>Registration Link</label>
           <input  class="form-control" id="pwd1" required="" type="text">
         </div>
-  
-       
-       
+
+
+
         <!-- <button class="btn btn-success btn-lg float-right" type="button">Login</button> -->
       </form>
     </div>
@@ -50,10 +50,10 @@
       <button type="button" class="btn btn-success btn-lg float-right" (click)="modal.close('Save click')">Save</button>
     </div>
   </ng-template>
-  
+
   <!-- <button mat-raised-button color="primary" (click)="open(content)">Add Lecture</button> -->
-  
-  
+
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -63,7 +63,7 @@
        <div><button mat-raised-button color="primary" class="add-btn" (click)="open(content)"><span class="material-icons">
           add_circle
           </span> Add Workshop</button></div>
-  
+
         <div class="card-body">
           <div class="table-responsive">
             <table class="table">
@@ -121,15 +121,15 @@
                       <span class="material-icons">
                       edit
                       </span>
-                    </button>    
+                    </button>
                     <button mat-raised-button color="warn" style="margin: 5px;">
                       <span class="material-icons">
                       delete
                       </span>
                     </button>
-  
-  
-                  </td>            
+
+
+                  </td>
                 </tr>
                 <tr>
                   <td>
@@ -158,24 +158,23 @@
                       <span class="material-icons">
                       edit
                       </span>
-                    </button>    
+                    </button>
                     <button mat-raised-button color="warn" style="margin: 5px;">
                       <span class="material-icons">
                       delete
                       </span>
                     </button>
-  
-  
-                  </td>            
+
+
+                  </td>
                 </tr>
-                
+
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
-    
+
   </div>
-  
-  
+
