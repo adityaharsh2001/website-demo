@@ -47,26 +47,30 @@ router.get("", (req, res, next) => {
 
 router.post("" ,(req, res, next) => {
 
-  console.log(req.body);
+  // console.log(req.body);
     // const url = req.protocol + "://" + req.get("host");
-    // const lecture = new Lecture({
-    //   name: req.body.name,
-    //   profession: req.body.profession,
-    //   lectureTitle: req.body.lectureTitle,
-    //   date: req.body.date,
-    //   regLink: req.body.regLink,
-    //   status: req.body.status
-    // });
+    const lecture = new Lecture({
+      name: req.body.name,
+      profession: req.body.profession,
+      lectureTitle: req.body.lectureTitle,
+      date: req.body.date,
+      regLink: req.body.regLink,
+      status: req.body.status
+    });
 
     b = req.body;
+    // con
       // console.log(lecture);
   //   // imagePath: url + "/images/" + req.file.filename
-    // lecture.save().then(() => {
-    // });
-
-    res.status(201).json({
-      message: "Post added successfully",
-      b
+      lecture.save().then(createdPost => {
+        res.status(201).json({
+          message: "Post added successfully",
+          post: {
+            ...createdPost,
+            id: createdPost._id
+          }
+        });
+      });
     });
 
     // lecture
@@ -75,7 +79,7 @@ router.post("" ,(req, res, next) => {
     //   id: createdlecture._id
     // }
 
-});
+
 
 
 

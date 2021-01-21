@@ -46,38 +46,39 @@ export class LecturesService {
 
   addPost(lecture) {
     const lectureData = new FormData();
-    lectureData.append("title", lecture.name);
+    lectureData.append("name", lecture.name);
     lectureData.append("profession", lecture.profession);
     lectureData.append("lectureTitle", lecture.lectureTitle);
     lectureData.append("date", lecture.date);
     lectureData.append("regLink", lecture.regLink);
     lectureData.append("status", (lecture.status).toString());
-
+    lectureData.append("imagePath", lecture.imagePath, lecture.name);
     console.log(lecture);
-    console.log(lectureData);
+    // console.log(lecture.name);
+    // console.log(lectureData);
 
-
-    // // postData.append("image", image, title);
     this.http
-      .post<{ message: string; lecture: Lecture }>(
+      .post<{ message: string; lec: Lecture }>(
         "http://localhost:5000/api/lectures",
-        lectureData
+        lecture
       )
       .subscribe(responseData => {
-        const lecture: Lecture = {
-          name: responseData.lecture.name,
-          lectureTitle: responseData.lecture.lectureTitle,
-          date: responseData.lecture.date,
-          profession: responseData.lecture.profession,
-          regLink: responseData.lecture.regLink,
-          status: responseData.lecture.status
-        };
-        // console.log(lecture);
-    this.lectures.push(lecture);
-    this.lecturesUpdated.next([...this.lectures]);
+        // const lect: Lecture = {
+        //   name: responseData.lec.name,
+        //   lectureTitle: responseData.lec.lectureTitle,
+        //   date: responseData.lec.date,
+        //   profession: responseData.lec.profession,
+        //   regLink: responseData.lec.regLink,
+        //   status: responseData.lec.status
+        // };
+        console.log(responseData);
+    // this.lectures.push(lect);
+    // this.lecturesUpdated.next([...this.lectures]);
     // this.router.navigate(["/"]);
     });
   }
+
+
 
   // updatePost(id: string, title: string, content: string, image: File | string) {
   //   let postData: Post | FormData;

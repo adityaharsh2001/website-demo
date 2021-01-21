@@ -5,7 +5,7 @@ export interface Lecture {
   lectureTitle: string,
   date: string,
   regLink: string
+  imagePath: string,
 }
-// imagePath: string,
 
 // time: string,

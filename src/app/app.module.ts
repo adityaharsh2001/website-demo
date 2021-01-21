@@ -12,6 +12,9 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import {MatRadioModule} from '@angular/material/radio';
 
+
+
+
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
@@ -63,7 +66,8 @@ import { CompetitionComponent } from './pages/competition/competition.component'
     HttpClientModule,
     MatButtonModule,
     MatDialogModule,
-    MatRadioModule
+    MatRadioModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
