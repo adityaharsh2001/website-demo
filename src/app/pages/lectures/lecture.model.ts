@@ -1,9 +1,9 @@
 export interface Lecture {
   name: string,
   profession: string
-  status: boolean,
+  status: string,
   lectureTitle: string,
-  date: string,
+  date: String,
   regLink: string
   imagePath: string,
 }

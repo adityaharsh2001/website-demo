@@ -53,14 +53,14 @@ export class LecturesService {
     lectureData.append("regLink", lecture.regLink);
     lectureData.append("status", (lecture.status).toString());
     lectureData.append("imagePath", lecture.imagePath, lecture.name);
-    console.log(lecture);
-    // console.log(lecture.name);
-    // console.log(lectureData);
+
+    console.log(lecture.date);
+    console.log(typeof(lecture.date));
 
     this.http
       .post<{ message: string; lec: Lecture }>(
         "http://localhost:5000/api/lectures",
-        lecture
+        lectureData
       )
       .subscribe(responseData => {
         // const lect: Lecture = {
@@ -71,7 +71,7 @@ export class LecturesService {
         //   regLink: responseData.lec.regLink,
         //   status: responseData.lec.status
         // };
-        console.log(responseData);
+        // console.log(responseData);
     // this.lectures.push(lect);
     // this.lecturesUpdated.next([...this.lectures]);
     // this.router.navigate(["/"]);

@@ -45,39 +45,30 @@ router.get("", (req, res, next) => {
   });
 });
 
-router.post("" ,(req, res, next) => {
-
-  // console.log(req.body);
-    // const url = req.protocol + "://" + req.get("host");
+router.post(
+  "" ,
+   multer({ storage: storage }).single("imagePath"),
+  (req, res, next) => {
+    const url = req.protocol + "://" + req.get("host");
     const lecture = new Lecture({
       name: req.body.name,
       profession: req.body.profession,
       lectureTitle: req.body.lectureTitle,
       date: req.body.date,
       regLink: req.body.regLink,
-      status: req.body.status
+      status: req.body.status,
+      imagePath: url + "/images/" + req.file.filename
     });
 
-    b = req.body;
-    // con
-      // console.log(lecture);
-  //   // imagePath: url + "/images/" + req.file.filename
+      b = req.body
       lecture.save().then(createdPost => {
         res.status(201).json({
           message: "Post added successfully",
-          post: {
-            ...createdPost,
-            id: createdPost._id
-          }
+          b
         });
       });
-    });
 
-    // lecture
-    // lecture: {
-    //   ...createdlecture,
-    //   id: createdlecture._id
-    // }
+});
 
 
 
