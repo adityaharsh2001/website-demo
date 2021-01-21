@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { mimeType } from "./mime-type.validator";
 
+
+import { Lecture } from "./lecture.model";
+import { LecturesService } from "./lecture.service";
 
 
 @Component({
@@ -12,21 +16,20 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
   styleUrls: ['lectures.component.css']
 
 })
+
 export class LecturesComponent implements OnInit {
   closeResult = '';
   status = "upcoming";
   form: FormGroup;
-  constructor(private modalService: NgbModal) {}
-
+  imagePreview: string;
+  isLoading = false;
+  constructor(private modalService: NgbModal, public lecturesService: LecturesService,) {}
 
   Upcoming(){
    this.status = "upcoming"
-
-    console.log("upcoming");
   }
   Done(){
     this.status = "done";
-    console.log("done");
   }
 
 
@@ -46,13 +49,13 @@ export class LecturesComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
-    console.log("open");
+
   }
 
 
   ngOnInit(): void
   {
-    console.log("init");
+
     this.status = "upcoming"
     this.form = new FormGroup(
       {
@@ -60,17 +63,50 @@ export class LecturesComponent implements OnInit {
           validators: [Validators.required, Validators.minLength(3)]
         }),
         profession: new FormControl(null, {validators: [Validators.required]}),
-        lecture_title: new FormControl(null, {validators: [Validators.required]}),
+        lectureTitle: new FormControl(null, {validators: [Validators.required]}),
         date: new FormControl(null, {validators: [Validators.required]}),
-        registration_link: new FormControl(null, {validators: [Validators.required]}),
+        regLink: new FormControl(null, {validators: [Validators.required]}),
+        image: new FormControl(null, {
+          validators: [Validators.required],
+          asyncValidators: [mimeType]
+        })
       }
     )
 
   }
-  onSaveLecture(){
-    console.log(this.form.value);
-    // console.log("daf;jdaf");
-    console.log(this.form.value.name);
+
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({ image: file });
+    this.form.get("image").updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  onSaveLecture(event: Event){
+    if (this.form.invalid) {
+      return;
+    }
+    this.isLoading = true;
+    event.preventDefault();
+    let lecture = {
+      "_id": null,
+      "name": this.form.value.name,
+      "profession": this.form.value.profession,
+      "date": this.form.value.date,
+      "regLink": this.form.value.regLink,
+      "status": true,
+      "lectureTitle": this.form.value.lectureTitle,
+      "imagePath": this.form.value.image
+    }
+
+    console.log(this.form);
+    this.lecturesService.addPost(lecture);
+    this.form.reset();
+
   }
 }
 
