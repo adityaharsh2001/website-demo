@@ -44,6 +44,8 @@ exports.getLectures = (req, res, next) => {
   });;
 
 };
+
+
 exports.addLectures = (req, res, next) => {
   const url = req.protocol + "://" + req.get("host");
     const lecture = new Lecture({
