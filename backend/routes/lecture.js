@@ -2,7 +2,6 @@ const express = require("express");
 const multer = require("multer");
 
 
-// const Post = require("../models/post");
 const Lecture = require("../models/lecture");
 
 const router = express.Router();
@@ -54,7 +53,12 @@ router.post(
       name: req.body.name,
       profession: req.body.profession,
       lectureTitle: req.body.lectureTitle,
-      date: req.body.date,
+      date: {
+        "year": req.body.year,
+        "month": req.body.month,
+        "day": req.body.day,
+
+      },
       regLink: req.body.regLink,
       status: req.body.status,
       imagePath: url + "/images/" + req.file.filename
