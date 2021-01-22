@@ -11,40 +11,59 @@ export class LecturesService {
   private lectures: Lecture[] = [];
   private lecturesUpdated = new Subject<Lecture[]>();
 
+
   constructor(private http: HttpClient, private router: Router) {}
 
-  // getPosts() {
-  //   this.http
-  //     .get<{ message: string; posts: any }>("http://localhost:3000/api/posts")
-  //     .pipe(
-  //       map(postData => {
-  //         return postData.posts.map(post => {
-  //           return {
-  //             title: post.title,
-  //             content: post.content,
-  //             id: post._id,
-  //             imagePath: post.imagePath
-  //           };
-  //         });
-  //       })
-  //     )
-  //     .subscribe(transformedPosts => {
-  //       this.posts = transformedPosts;
-  //       this.postsUpdated.next([...this.posts]);
-  //     });
-  // }
+  getLectures() {
+    this.http
+    .get<{ message: string; lectures: any }>("http://localhost:5000/api/lectures")
+    .pipe(
+      map(lectureData => {
+        return lectureData.lectures.map(lecture => {
+          // console.log(lecture);
+          return {
+            name: lecture.name,
+            profession: lecture.profession,
+            _id: lecture._id,
+            imagePath: lecture.imagePath,
+            status: lecture.status,
+            date: lecture.date,
+            regLink: lecture.regLink,
+            lectureTitle: lecture.lectureTitle
 
-  // getPostUpdateListener() {
-  //   return this.postsUpdated.asObservable();
-  // }
+          };
+        });
+      })
+    )
+    .subscribe(transformedPosts => {
+      this.lectures = transformedPosts;
+      // console.log(this.lectures);
+      this.lecturesUpdated.next([...this.lectures]);
+    });
 
-  // getPost(id: string) {
-  //   return this.http.get<{ _id: string, title: string, content: string, imagePath: string }>(
-  //     "http://localhost:3000/api/posts/" + id
-  //   );
-  // }
+  }
 
-  addPost(lecture) {
+  getLectureUpdateListener() {
+    return this.lecturesUpdated.asObservable();
+  }
+
+  findLecture(id: string) {
+    return this.http.get<{
+      _id: string;
+      name: string;
+       profession:string;
+      date:{year:string; day:string; month:string;};
+      status:string;
+      imagePath:string;
+      regLink:string;
+      lectureTitle:string;
+    }>(
+      "http://localhost:5000/api/lectures/" + id
+    );
+  }
+
+
+  addLecture(lecture, image:File) {
     const lectureData = new FormData();
     lectureData.append("name", lecture.name);
     lectureData.append("profession", lecture.profession);
@@ -54,10 +73,8 @@ export class LecturesService {
     lectureData.append("day", lecture.date.day);
     lectureData.append("regLink", lecture.regLink);
     lectureData.append("status", (lecture.status).toString());
-    lectureData.append("imagePath", lecture.imagePath, lecture.name);
+    lectureData.append("imagePath", lecture.image, lecture.name);
 
-    console.log(lecture.date);
-    console.log(typeof(lecture.date));
 
     this.http
       .post<{ message: string; lec: Lecture }>(
@@ -69,49 +86,54 @@ export class LecturesService {
     });
   }
 
+  deleteLecture(lectureId: string) {
+    this.http
+      .delete("http://localhost:5000/api/lectures/" + lectureId)
+      .subscribe(() => {
+        const updatedLectures = this.lectures.filter(lecture => lecture._id !== lectureId);
+        this.lectures = updatedLectures;
+        this.lecturesUpdated.next([...this.lectures]);
+      });
+  }
 
 
-  // updatePost(id: string, title: string, content: string, image: File | string) {
-  //   let postData: Post | FormData;
-  //   if (typeof image === "object") {
-  //     postData = new FormData();
-  //     postData.append("id", id);
-  //     postData.append("title", title);
-  //     postData.append("content", content);
-  //     postData.append("image", image, title);
-  //   } else {
-  //     postData = {
-  //       id: id,
-  //       title: title,
-  //       content: content,
-  //       imagePath: image
-  //     };
-  //   }
-  //   this.http
-  //     .put("http://localhost:3000/api/posts/" + id, postData)
-  //     .subscribe(response => {
-  //       const updatedPosts = [...this.posts];
-  //       const oldPostIndex = updatedPosts.findIndex(p => p.id === id);
-  //       const post: Post = {
-  //         id: id,
-  //         title: title,
-  //         content: content,
-  //         imagePath: ""
-  //       };
-  //       updatedPosts[oldPostIndex] = post;
-  //       this.posts = updatedPosts;
-  //       this.postsUpdated.next([...this.posts]);
-  //       this.router.navigate(["/"]);
-  //     });
-  // }
+  updateLecture(lecture, image: File | string) {
+    let LectureData: Lecture | FormData;
+    if (typeof image === "object") {
+      LectureData = new FormData();
+      LectureData.append("name", lecture.name);
+    LectureData.append("profession", lecture.profession);
+    LectureData.append("lectureTitle", lecture.lectureTitle);
+    LectureData.append("year", lecture.date.year);
+    LectureData.append("month", lecture.date.month);
+    LectureData.append("day", lecture.date.day);
+    LectureData.append("regLink", lecture.regLink);
+    LectureData.append("status", (lecture.status).toString());
+    LectureData.append("imagePath", lecture.image, lecture.name);
+    }
+    else {
+      LectureData = {
+        _id: lecture._id,
+        name: lecture.name,
+        profession: lecture.profession,
+        lectureTitle: lecture.lectureTitle,
+        regLink: lecture.regLink,
+        status: lecture.status,
+        date:{
+          day: lecture.date.day,
+          year: lecture.date.year,
+          month: lecture.date.month
+        },
+        imagePath: image
+      };
+    }
+    this.http
+      .put("http://localhost:5000/api/lectures/" + lecture._id, LectureData)
+      .subscribe(response => {
+        console.log(response);
+        }
 
-  // deletePost(postId: string) {
-  //   this.http
-  //     .delete("http://localhost:3000/api/posts/" + postId)
-  //     .subscribe(() => {
-  //       const updatedPosts = this.posts.filter(post => post.id !== postId);
-  //       this.posts = updatedPosts;
-  //       this.postsUpdated.next([...this.posts]);
-  //     });
-  // }
+      );
+  }
+
 }
