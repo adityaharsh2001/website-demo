@@ -1,5 +1,6 @@
 const express = require("express");
 const multer = require("multer");
+const lecture = require("../models/lecture");
 
 
 const Lecture = require("../models/lecture");
@@ -35,7 +36,7 @@ exports.getLectures = (req, res, next) => {
   Lecture.find().then(documents => {
     res.status(200).json({
       message: "Posts fetched successfully!",
-      posts: documents
+     lectures: documents
     });
   }).catch(err => {
     const error = new Error(err);
@@ -49,6 +50,7 @@ exports.getLectures = (req, res, next) => {
 exports.addLectures = (req, res, next) => {
   const url = req.protocol + "://" + req.get("host");
     const lecture = new Lecture({
+
       name: req.body.name,
       profession: req.body.profession,
       lectureTitle: req.body.lectureTitle,
@@ -66,10 +68,64 @@ exports.addLectures = (req, res, next) => {
       b = req.body
       lecture.save().then(createdPost => {
         res.status(201).json({
-          message: "Post added successfully",
           b
         });
       });
 };
 
+
+exports.deleteLecture = (req, res, next) =>{
+  Lecture.deleteOne({ _id: req.params.id }).then(result => {
+    // console.log(result);
+    res.status(200).json({ message: "Post deleted!" });
+  }).catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+}
+
+exports.findLecture = (req, res, next) =>{
+  // console.log(req.params)
+  Lecture.findById(req.params.id).then(lecture => {
+    if (lecture) {
+      res.status(200).json(lecture);
+    } else {
+      res.status(404).json({ message: "Post not found!" });
+    }
+  });
+}
+
+exports.updateLecture = (req, res, next) =>{
+  let imagePath = req.body.imagePath;
+    // console.log(req.file);
+    const url = req.protocol + "://" + req.get("host");
+    if (req.file) {
+      imagePath = url + "/images/" + req.file.filename
+    }
+    // lectureId = req.body._id;
+    const lecture = new Lecture({
+      _id: req.params.id,
+      name: req.body.name,
+      profession: req.body.profession,
+      lectureTitle: req.body.lectureTitle,
+      date: {
+        "year": req.body.year,
+        "month": req.body.month,
+        "day": req.body.day,
+
+      },
+      regLink: req.body.regLink,
+      status: req.body.status,
+      imagePath: url + "/images/" + req.file.filename
+    });
+
+    // console.log(lecture);
+    // console.log(req.body._id);
+    // console.log(req.body);
+    // console.log(req.params.id);
+    Lecture.updateOne({ _id:req.params.id }, lecture).then(result => {
+      res.status(200).json({ message: "Update successful!" });
+    });
+  }
 

@@ -3,10 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { mimeType } from "./mime-type.validator";
-
+import { Subscription } from 'rxjs';
 
 import { Lecture } from "./lecture.model";
 import { LecturesService } from "./lecture.service";
+import { DatePipe, getLocaleDateFormat } from '@angular/common';
 
 
 @Component({
@@ -18,12 +19,18 @@ import { LecturesService } from "./lecture.service";
 })
 
 export class LecturesComponent implements OnInit {
+  // const date: NgbDate = new NgbDate(1789, 7, 14);
   closeResult = '';
   status = "upcoming";
   form: FormGroup;
   imagePreview: string;
   isLoading = false;
   constructor(private modalService: NgbModal, public lecturesService: LecturesService,) {}
+  private lecturesSub: Subscription;
+  lectures: Lecture[] = [];
+  private mode = "create";
+  private lectureId: string;
+  lecture: Lecture;
 
   Upcoming(){
    this.status = "upcoming"
@@ -52,10 +59,10 @@ export class LecturesComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void
   {
 
+    // console.log(getLocaleDateFormat);
     this.status = "upcoming"
     this.form = new FormGroup(
       {
@@ -72,6 +79,14 @@ export class LecturesComponent implements OnInit {
         })
       }
     )
+
+    this.lecturesService.getLectures();
+    this.lecturesSub = this.lecturesService.getLectureUpdateListener()
+      .subscribe((lectures: Lecture[]) => {
+        this.isLoading = false;
+        this.lectures = lectures;
+      });
+      // console.log(lectures);
 
   }
 
@@ -92,20 +107,84 @@ export class LecturesComponent implements OnInit {
     }
     this.isLoading = true;
     event.preventDefault();
+    if(this.mode === "create"){
+      this.lectureId = null
+
+    }
+    else{
+      this.lectureId = this.lecture._id;
+
+    }
     let lecture = {
-      "_id": null,
+      "_id": this.lectureId,
       "name": this.form.value.name,
       "profession": this.form.value.profession,
       "date": this.form.value.date,
       "regLink": this.form.value.regLink,
       "status": this.status,
       "lectureTitle": this.form.value.lectureTitle,
-      "imagePath": this.form.value.image
+      "image": this.form.value.image
+    }
+    // "imagePath": this.form.value.name
+
+    if(this.mode === 'create' ){
+      // console.log(this.form.value.date);
+
+      this.lecturesService.addLecture(lecture,this.form.value.image);
+      this.isLoading = false;
     }
 
-    this.lecturesService.addPost(lecture);
+    else{
+      this.lecturesService.updateLecture(lecture, this.form.value.image);
+      this.isLoading  = false;
+    }
     this.form.reset();
+  }
 
+  onDeleteLecture(id){
+    this.lecturesService.deleteLecture(id);
+  }
+
+  onEditLecture(id){
+
+    this.lectureId = id;
+    // this.lecturesService.findLecture(id);
+    this.mode = "edit";
+    this.isLoading = true;
+        this.lecturesService.findLecture(this.lectureId).subscribe(lectureData => {
+          this.isLoading = false;
+          this.lecture = {
+            _id: lectureData._id,
+            name: lectureData.name,
+            profession: lectureData.profession,
+            imagePath: lectureData.imagePath,
+            date:{
+              year : lectureData.date.year,
+              day :lectureData.date.day,
+              month: lectureData.date.month
+            },
+            status: lectureData.status,
+            lectureTitle: lectureData.lectureTitle,
+            regLink: lectureData.regLink
+          };
+          // console.log(this.lecture);
+          this.imagePreview = this.lecture.imagePath;
+          this.form.setValue(
+          {
+            name:this.lecture.name,
+            profession: this.lecture.profession,
+            lectureTitle: this.lecture.lectureTitle,
+            date:this.lecture.date,
+            regLink: this.lecture.regLink,
+            image: this.lecture.imagePath,
+          }
+
+          );
+        });
+
+  }
+  ngOnDestroy() {
+    this.lecturesSub.unsubscribe();
   }
 }
 
