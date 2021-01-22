@@ -8,6 +8,8 @@ const config = require("../config.json");
 const lecturesRoutes = require("./routes/lecture");
 const workshopsRoutes = require("./routes/workshop");
 const competitionRoutes = require("./routes/competition");
+const sponsorRoutes = require("./routes/sponsor");
+const teamRoutes = require("./routes/team");
 
 const app = express();
 
@@ -45,5 +47,7 @@ app.use((req, res, next) => {
 app.use("/api/lectures", lecturesRoutes);
 app.use("/api/workshops", workshopsRoutes);
 app.use("/api/competitions", competitionRoutes);
+app.use("/api/sponsors", sponsorRoutes);
+app.use("/api/team", teamRoutes);
 
 module.exports = app;

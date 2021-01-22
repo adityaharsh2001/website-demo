@@ -6,7 +6,7 @@ const teamSchema = mongoose.Schema({
   imagePath: { type: String, required: true },
   linkedin: {type: String, required: true},
   mailId: {type: String, required: true},
-  contact: {type: Number, required: true}
+  contact: {type: String, required: true}
 });
 
 module.exports = mongoose.model("Team", teamSchema);
