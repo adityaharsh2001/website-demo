@@ -98,12 +98,11 @@ export class LecturesComponent implements OnInit {
       "profession": this.form.value.profession,
       "date": this.form.value.date,
       "regLink": this.form.value.regLink,
-      "status": true,
+      "status": this.status,
       "lectureTitle": this.form.value.lectureTitle,
       "imagePath": this.form.value.image
     }
 
-    console.log(this.form);
     this.lecturesService.addPost(lecture);
     this.form.reset();
 

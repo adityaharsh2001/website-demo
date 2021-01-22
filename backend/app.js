@@ -39,8 +39,7 @@ app.use((req, res, next) => {
   next();
 });
 
-console.log("d;fak");
-// app.use("/api/posts", postsRoutes);
+
 app.use("/api/lectures", lecturesRoutes);
 
 module.exports = app;

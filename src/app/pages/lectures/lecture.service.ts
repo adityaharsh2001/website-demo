@@ -49,32 +49,23 @@ export class LecturesService {
     lectureData.append("name", lecture.name);
     lectureData.append("profession", lecture.profession);
     lectureData.append("lectureTitle", lecture.lectureTitle);
-    lectureData.append("date", lecture.date);
+    lectureData.append("year", lecture.date.year);
+    lectureData.append("month", lecture.date.month);
+    lectureData.append("day", lecture.date.day);
     lectureData.append("regLink", lecture.regLink);
     lectureData.append("status", (lecture.status).toString());
     lectureData.append("imagePath", lecture.imagePath, lecture.name);
-    console.log(lecture);
-    // console.log(lecture.name);
-    // console.log(lectureData);
+
+    console.log(lecture.date);
+    console.log(typeof(lecture.date));
 
     this.http
       .post<{ message: string; lec: Lecture }>(
         "http://localhost:5000/api/lectures",
-        lecture
+        lectureData
       )
       .subscribe(responseData => {
-        // const lect: Lecture = {
-        //   name: responseData.lec.name,
-        //   lectureTitle: responseData.lec.lectureTitle,
-        //   date: responseData.lec.date,
-        //   profession: responseData.lec.profession,
-        //   regLink: responseData.lec.regLink,
-        //   status: responseData.lec.status
-        // };
-        console.log(responseData);
-    // this.lectures.push(lect);
-    // this.lecturesUpdated.next([...this.lectures]);
-    // this.router.navigate(["/"]);
+        // console.log(responseData);
     });
   }
 
