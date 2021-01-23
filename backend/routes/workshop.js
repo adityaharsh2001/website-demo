@@ -37,4 +37,11 @@ router.get("", workshopController.getWorkshops);
 
 router.post("" , multer({ storage: storage }).single("imagePath"), workshopController.addWorkshops);
 
+router.delete("/:id", workshopController.deleteWorkshop);
+
+router.get("/:id", workshopController.findWorkshop);
+
+
+router.put( "/:id", multer({ storage: storage }).single("imagePath") ,workshopController.updateWorkshop);
+
 module.exports = router;

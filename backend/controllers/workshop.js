@@ -71,4 +71,58 @@ exports.addWorkshops = (req, res, next) => {
       });
 };
 
+exports.deleteWorkshop = (req, res, next) =>{
+  Workshop.deleteOne({ _id: req.params.id }).then(result => {
+    // console.log(result);
+    res.status(200).json({ message: "Workshop deleted!" });
+  }).catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+}
+
+exports.findWorkshop = (req, res, next) =>{
+  // console.log(req.params)
+  Workshop.findById(req.params.id).then(workshop => {
+    if (workshop) {
+      res.status(200).json(workshop);
+    } else {
+      res.status(404).json({ message: "Workshop not found!" });
+    }
+  });
+}
+
+exports.updateWorkshop = (req, res, next) =>{
+  let imagePath = req.body.imagePath;
+    // console.log(req.file);
+    const url = req.protocol + "://" + req.get("host");
+    if (req.file) {
+      imagePath = url + "/images/" + req.file.filename;
+    }
+    // workshopId = req.body._id;
+    const workshop = new Workshop({
+      _id: req.params.id,
+      title: req.body.title,
+      description: req.body.description,
+      date: {
+        "year": req.body.year,
+        "month": req.body.month,
+        "day": req.body.day,
+      },
+      regLink: req.body.regLink,
+      status: req.body.status,
+      price: req.body.price,
+      imagePath: url + "/images/" + req.file.filename
+    });
+
+    // console.log(workshop);
+    // console.log(req.body._id);
+    // console.log(req.body);
+    // console.log(req.params.id);
+    Workshop.updateOne({ _id:req.params.id }, workshop).then(result => {
+      res.status(200).json({ message: "Update successful!" });
+    });
+  }
+
 

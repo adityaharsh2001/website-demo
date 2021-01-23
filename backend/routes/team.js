@@ -37,4 +37,11 @@ router.get("", teamController.getTeams);
 
 router.post("" , multer({ storage: storage }).single("imagePath"), teamController.addTeam);
 
+router.delete("/:id", teamController.deleteTeam);
+
+router.get("/:id", teamController.findTeam);
+
+
+router.put( "/:id", multer({ storage: storage }).single("imagePath") ,teamController.updateTeam);
+
 module.exports = router;

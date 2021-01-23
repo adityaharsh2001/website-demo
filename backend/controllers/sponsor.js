@@ -66,4 +66,53 @@ exports.addSponsors = (req, res, next) => {
       });
 };
 
+exports.deleteSponsor = (req, res, next) =>{
+  Sponsor.deleteOne({ _id: req.params.id }).then(result => {
+    // console.log(result);
+    res.status(200).json({ message: "Sponsor deleted!" });
+  }).catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+}
+
+exports.findSponsor = (req, res, next) =>{
+  // console.log(req.params)
+  Sponsor.findById(req.params.id).then(sponsor => {
+    if (sponsor) {
+      res.status(200).json(sponsor);
+    } else {
+      res.status(404).json({ message: "Sponsor not found!" });
+    }
+  });
+}
+
+exports.updateSponsor = (req, res, next) =>{
+  let imagePath = req.body.imagePath;
+    // console.log(req.file);
+    const url = req.protocol + "://" + req.get("host");
+    if (req.file) {
+      imagePath = url + "/images/" + req.file.filename;
+    }
+    // sponsorId = req.body._id;
+    const sponsor = new Sponsor({
+      _id: req.params.id,
+      sponsorName: req.body.sponsorName,
+      sponsorTitle: req.body.sponsorTitle,
+      year: req.body.year,
+      link: req.body.link,
+      status: req.body.status,
+      imagePath: url + "/images/" + req.file.filename
+    });
+
+    // console.log(sponsor);
+    // console.log(req.body._id);
+    // console.log(req.body);
+    // console.log(req.params.id);
+    Sponsor.updateOne({ _id:req.params.id }, sponsor).then(result => {
+      res.status(200).json({ message: "Update successful!" });
+    });
+  }
+
 

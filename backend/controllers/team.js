@@ -66,4 +66,53 @@ exports.addTeams = (req, res, next) => {
       });
 };
 
+exports.deleteTeam = (req, res, next) =>{
+  Team.deleteOne({ _id: req.params.id }).then(result => {
+    // console.log(result);
+    res.status(200).json({ message: "Team deleted!" });
+  }).catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+}
+
+exports.findTeam = (req, res, next) =>{
+  // console.log(req.params)
+  Team.findById(req.params.id).then(team => {
+    if (team) {
+      res.status(200).json(team);
+    } else {
+      res.status(404).json({ message: "Team not found!" });
+    }
+  });
+}
+
+exports.updateTeam = (req, res, next) =>{
+  let imagePath = req.body.imagePath;
+    // console.log(req.file);
+    const url = req.protocol + "://" + req.get("host");
+    if (req.file) {
+      imagePath = url + "/images/" + req.file.filename;
+    }
+    // teamId = req.body._id;
+    const team = new Team({
+      _id: req.params.id,
+      name: req.body.name,
+      designation: req.body.designation,
+      year: req.body.year,
+      linkedin: req.body.linkedin,
+      contact: req.body.contact,
+      imagePath: url + "/images/" + req.file.filename
+    });
+
+    // console.log(team);
+    // console.log(req.body._id);
+    // console.log(req.body);
+    // console.log(req.params.id);
+    Team.updateOne({ _id:req.params.id }, team).then(result => {
+      res.status(200).json({ message: "Update successful!" });
+    });
+  }
+
 

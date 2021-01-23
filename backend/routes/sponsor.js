@@ -37,4 +37,11 @@ router.get("", sponsorController.getSponsors);
 
 router.post("" , multer({ storage: storage }).single("imagePath"), sponsorController.addSponsor);
 
+router.delete("/:id", sponsorController.deleteSponsor);
+
+router.get("/:id", sponsorController.findSponsor);
+
+
+router.put( "/:id", multer({ storage: storage }).single("imagePath") ,sponsorController.updateSponsor);
+
 module.exports = router;

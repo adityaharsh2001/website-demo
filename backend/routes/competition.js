@@ -37,4 +37,11 @@ router.get("", competitionController.getCompetitions);
 
 router.post("" , multer({ storage: storage }).single("imagePath"), competitionController.addCompetition);
 
+router.delete("/:id", competitonController.deleteCompetiton);
+
+router.get("/:id", competitonController.findCompetiton);
+
+
+router.put( "/:id", multer({ storage: storage }).single("imagePath") ,competitonController.updateCompetiton);
+
 module.exports = router;
