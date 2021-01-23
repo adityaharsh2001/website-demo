@@ -1,4 +1,4 @@
-export interface Lecture {
+export interface Sponsor {
   _id: string,
   sponsorName: string,
   imagePath: string,
