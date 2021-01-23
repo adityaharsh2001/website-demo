@@ -4,7 +4,11 @@ export interface Lecture {
   description: string,
   imagePath: string
   price: string,
-  date: string,
+  date:{
+    year: string,
+    month: string,
+    day:string
+  },
   time: string,
   regLink: string
 }

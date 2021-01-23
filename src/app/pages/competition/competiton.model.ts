@@ -4,7 +4,11 @@ export interface Team {
   description: string
   imagePath: string,
   status: boolean,
-  date: string,
+  date:{
+    year: string,
+    month: string,
+    day:string
+  },
   time: string,
   regLink: string
 }
