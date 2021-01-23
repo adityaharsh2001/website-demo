@@ -1,4 +1,4 @@
-export interface Team {
+export interface Competition {
   _id: string,
   title: string,
   description: string
