@@ -5,5 +5,5 @@ export interface Team {
   imagePath: string,
   linkedin: string
   mailId: string,
-  contact: string,
+  contact: string
 }
