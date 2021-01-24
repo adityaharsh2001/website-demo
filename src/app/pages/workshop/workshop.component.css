@@ -1,13 +1,35 @@
+
 .add-btn{
-    width: min-content;
-    margin-left: 20px;
+  width: min-content;
+  margin-left: 20px;
 }
 .calendar{
 
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-bottom: 0px;
-    padding-top: 5px;
-    margin-left: 10px;
-    margin-bottom: 10px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-bottom: 0px;
+  padding-top: 5px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
+
+.status{
+margin: 5px;
+}
+
+input[type="file"] {
+visibility: hidden;
+}
+
+.image-preview {
+height: 5rem;
+margin: 1rem 0;
+}
+
+.image-preview img {
+height: 100%;
+}
+
+
+
+

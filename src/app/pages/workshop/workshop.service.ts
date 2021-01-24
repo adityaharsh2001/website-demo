@@ -19,8 +19,8 @@ export class WorkshopsService {
     .get<{ message: string; workshops: any }>("http://localhost:5000/api/workshops")
     .pipe(
       map(workshopData => {
-        return workshopData.lectures.map(workshop => {
-          // console.log(lecture);
+        return workshopData.workshops.map(workshop => {
+          // console.log(workshop);
           return {
             _id:workshop._id,
             title:workshop.title,
@@ -28,15 +28,15 @@ export class WorkshopsService {
             imagePath:workshop.imagePath,
             price:workshop.price,
             date:workshop.date,
-            time:workshop.time,
+            status:workshop.status,
             regLink:workshop.regLink
           };
         });
       })
     )
-    .subscribe(transformedPosts => {
-      this.workshops = transformedPosts;
-      // console.log(this.lectures);
+    .subscribe(transformedWorkshops => {
+      this.workshops = transformedWorkshops;
+      // console.log(this.workshops);
       this.workshopsUpdated.next([...this.workshops]);
     });
 
@@ -58,7 +58,7 @@ export class WorkshopsService {
           month: string,
           day:string
         },
-        time: string,
+        status: string,
         regLink: string
     }>(
       "http://localhost:5000/api/workshops/" + id
@@ -72,8 +72,11 @@ export class WorkshopsService {
     workshopData.append("description", workshop.description);
     workshopData.append("imagePath", workshop.image, workshop.name);
     workshopData.append("price", workshop.price);
-    workshopData.append("date", workshop.date);
-    workshopData.append("time", workshop.time);
+    // workshopData.append("date", workshop.date);
+    workshopData.append("year", workshop.date.year);
+    workshopData.append("month", workshop.date.month);
+    workshopData.append("day", workshop.date.day);
+    workshopData.append("status", workshop.status);
     workshopData.append("regLink", workshop.regLink);
 
 
@@ -98,7 +101,7 @@ export class WorkshopsService {
   }
 
 
-  updateLecture(workshop, image: File | string) {
+  updateWorkshop(workshop, image: File | string) {
     let WorkshopData: Workshop | FormData;
     if (typeof image === "object") {
       WorkshopData = new FormData();
@@ -118,9 +121,9 @@ export class WorkshopsService {
             imagePath:workshop.imagePath,
             price:workshop.price,
             date:workshop.date,
-            time:workshop.time,
-            regLink:workshop.regLink
-      };
+            regLink:workshop.regLink,
+            status:workshop.status,
+          };
     }
     this.http
       .put("http://localhost:5000/api/workshops/" + workshop._id, WorkshopData)

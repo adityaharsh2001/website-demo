@@ -2,6 +2,8 @@ const express = require("express");
 const multer = require("multer");
 const lecture = require("../models/lecture");
 
+const cloudinary = require("../utils/cloudinary");
+const upload = require("../utils/multer");
 
 const Lecture = require("../models/lecture");
 
@@ -32,7 +34,7 @@ const storage = multer.diskStorage({
   }
 });
 
-exports.getLectures = (req, res, next) => {
+exports.getLectures =  (req, res, next) => {
   Lecture.find().then(documents => {
     res.status(200).json({
       message: "Posts fetched successfully!",
@@ -47,8 +49,11 @@ exports.getLectures = (req, res, next) => {
 };
 
 
-exports.addLectures = (req, res, next) => {
+exports.addLectures = async (req, res, next) => {
   const url = req.protocol + "://" + req.get("host");
+
+ try{ const result = await cloudinary.uploader.upload(req.file.path);
+
     const lecture = new Lecture({
 
       name: req.body.name,
@@ -62,15 +67,23 @@ exports.addLectures = (req, res, next) => {
       },
       regLink: req.body.regLink,
       status: req.body.status,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: result.public_id,
     });
+    // imagePath: url + "/images/" + req.file.filename
+
 
       b = req.body
-      lecture.save().then(createdPost => {
+      await lecture.save().then(createdPost => {
         res.status(201).json({
           b
         });
-      });
+      }
+      )}
+
+      catch (err) {
+        console.log(err);
+      }
+
 };
 
 

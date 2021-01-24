@@ -5,6 +5,9 @@ const multer = require("multer");
 const Lecture = require("../models/lecture");
 const lectureController = require('../controllers/lecture');
 
+// const cloudinary = require("../utils/cloudinary");
+// const upload = require("../utils/multer");
+
 const router = express.Router();
 
 const MIME_TYPE_MAP = {
@@ -37,6 +40,7 @@ const storage = multer.diskStorage({
 router.get("", lectureController.getLectures);
 
 router.post("" , multer({ storage: storage }).single("imagePath"), lectureController.addLectures);
+// router.post("" , upload.single("image"), lectureController.addLectures);
 
 
 

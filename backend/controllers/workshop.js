@@ -35,7 +35,7 @@ exports.getWorkshops = (req, res, next) => {
   Workshop.find().then(documents => {
     res.status(200).json({
       message: "Workshops fetched successfully!",
-      posts: documents
+      workshops : documents
     });
   }).catch(err => {
     const error = new Error(err);
