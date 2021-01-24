@@ -68,11 +68,11 @@ export class LecturesService {
     lectureData.append("name", lecture.name);
     lectureData.append("profession", lecture.profession);
     lectureData.append("lectureTitle", lecture.lectureTitle);
+    lectureData.append("status", (lecture.status).toString());
+    lectureData.append("regLink", lecture.regLink);
     lectureData.append("year", lecture.date.year);
     lectureData.append("month", lecture.date.month);
     lectureData.append("day", lecture.date.day);
-    lectureData.append("regLink", lecture.regLink);
-    lectureData.append("status", (lecture.status).toString());
     lectureData.append("imagePath", lecture.image, lecture.name);
 
 

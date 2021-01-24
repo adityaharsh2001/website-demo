@@ -52,7 +52,8 @@ exports.getLectures =  (req, res, next) => {
 exports.addLectures = async (req, res, next) => {
   const url = req.protocol + "://" + req.get("host");
 
- try{ const result = await cloudinary.uploader.upload(req.file.path);
+ try{
+  //  const result = await cloudinary.uploader.upload(req.file.path);
 
     const lecture = new Lecture({
 
@@ -67,9 +68,9 @@ exports.addLectures = async (req, res, next) => {
       },
       regLink: req.body.regLink,
       status: req.body.status,
-      imagePath: result.public_id,
+      imagePath: url + "/images/" + req.file.filename
     });
-    // imagePath: url + "/images/" + req.file.filename
+    // imagePath: result.public_id,
 
 
       b = req.body

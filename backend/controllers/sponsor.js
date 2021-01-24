@@ -35,7 +35,7 @@ exports.getSponsors = (req, res, next) => {
   Sponsor.find().then(documents => {
     res.status(200).json({
       message: "Sponsors fetched successfully!",
-      posts: documents
+      sponsors: documents
     });
   }).catch(err => {
     const error = new Error(err);
@@ -46,7 +46,7 @@ exports.getSponsors = (req, res, next) => {
 };
 
 
-exports.addSponsors = (req, res, next) => {
+exports.addSponsor = (req, res, next) => {
   const url = req.protocol + "://" + req.get("host");
     const sponsor = new Sponsor({
       sponsorName: req.body.sponsorName,

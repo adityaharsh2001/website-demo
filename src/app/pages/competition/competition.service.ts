@@ -4,7 +4,7 @@ import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 
-import { Competition } from "./competiton.model";
+import { Competition } from "./competition.model";
 
 @Injectable({ providedIn: "root" })
 export class CompetitionsService {
@@ -27,8 +27,7 @@ export class CompetitionsService {
             description: competition.description,
             imagePath: competition.imagePath,
             status: competition.status,
-            date: competition.data,
-            time: competition.time,
+            date: competition.date,
             regLink: competition.regLink
           };
         });
@@ -73,10 +72,15 @@ export class CompetitionsService {
     competitionData.append("imagePath", competition.image, competition.name);
     competitionData.append("status", competition.status);
     competitionData.append("date", competition.date);
-    competitionData.append("time", competition.time);
+    // competitionData.append("time", competition.time);
     competitionData.append("regLink", competition.regLink);
-    
+    competitionData.append("year", competition.date.year);
+    competitionData.append("month", competition.date.month);
+    competitionData.append("day", competition.date.day);
+    // competitionData.append("imagePath", competition.image, competition.name);
 
+
+// console.log(competition);
 
     this.http
       .post<{ message: string; lec: Competition }>(
@@ -119,9 +123,9 @@ export class CompetitionsService {
             imagePath: competition.imagePath,
             status: competition.status,
             date: competition.data,
-            time: competition.time,
             regLink: competition.regLink
-      };
+          };
+          // time: competition.time,
     }
     this.http
       .put("http://localhost:5000/api/competitions/" + competition._id, CompetitionData)

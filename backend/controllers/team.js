@@ -35,7 +35,7 @@ exports.getTeams = (req, res, next) => {
   Team.find().then(documents => {
     res.status(200).json({
       message: "Teams fetched successfully!",
-      posts: documents
+      teams: documents
     });
   }).catch(err => {
     const error = new Error(err);
@@ -46,12 +46,14 @@ exports.getTeams = (req, res, next) => {
 };
 
 
-exports.addTeams = (req, res, next) => {
+exports.addTeam = (req, res, next) => {
+
   const url = req.protocol + "://" + req.get("host");
+  try{
     const team = new Team({
       name: req.body.name,
       designation: req.body.designation,
-      year: req.body.year,
+      mailId: req.body.mailId,
       linkedin: req.body.linkedin,
       contact: req.body.contact,
       imagePath: url + "/images/" + req.file.filename
@@ -64,6 +66,11 @@ exports.addTeams = (req, res, next) => {
           b
         });
       });
+  }
+  catch(err){
+    console.log(err);
+  }
+
 };
 
 exports.deleteTeam = (req, res, next) =>{

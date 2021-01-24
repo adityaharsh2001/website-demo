@@ -12,7 +12,7 @@ const MIME_TYPE_MAP = {
     "image/jpeg": "jpg",
     "image/jpg": "jpg"
   };
-  
+
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       const isValid = MIME_TYPE_MAP[file.mimetype];
@@ -37,11 +37,11 @@ router.get("", competitionController.getCompetitions);
 
 router.post("" , multer({ storage: storage }).single("imagePath"), competitionController.addCompetition);
 
-router.delete("/:id", competitonController.deleteCompetiton);
+router.delete("/:id", competitionController.deleteCompetiton);
 
-router.get("/:id", competitonController.findCompetiton);
+router.get("/:id", competitionController.findCompetiton);
 
 
-router.put( "/:id", multer({ storage: storage }).single("imagePath") ,competitonController.updateCompetiton);
+router.put( "/:id", multer({ storage: storage }).single("imagePath") ,competitionController.updateCompetiton);
 
 module.exports = router;

@@ -3,12 +3,12 @@ export interface Competition {
   title: string,
   description: string
   imagePath: string,
-  status: boolean,
+  status: string,
   date:{
     year: string,
     month: string,
     day:string
   },
-  time: string,
   regLink: string
 }
+// time: string,

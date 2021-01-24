@@ -31,11 +31,11 @@ const storage = multer.diskStorage({
   }
 });
 
-exports.getCompetetions = (req, res, next) => {
+exports.getCompetitions = (req, res, next) => {
   Competition.find().then(documents => {
     res.status(200).json({
       message: "Competitions fetched successfully!",
-      posts: documents
+      competitions: documents
     });
   }).catch(err => {
     const error = new Error(err);
@@ -46,8 +46,9 @@ exports.getCompetetions = (req, res, next) => {
 };
 
 
-exports.addCompetitions = (req, res, next) => {
+exports.addCompetition = (req, res, next) => {
   const url = req.protocol + "://" + req.get("host");
+
     const competition = new Competition({
       title: req.body.title,
       description: req.body.description,
@@ -68,6 +69,7 @@ exports.addCompetitions = (req, res, next) => {
           b
         });
       });
+      
 };
 
 exports.deleteCompetiton = (req, res, next) =>{

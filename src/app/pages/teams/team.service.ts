@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 import { Team } from "./team.model";
 
 @Injectable({ providedIn: "root" })
-export class TeamService {
+export class TeamsService {
   private teams: Team[] = [];
   private teamUpdated = new Subject<Team[]>();
 

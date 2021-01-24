@@ -66,9 +66,10 @@ export class SponsorsService {
     sponsorData.append("imagePath", sponsor.image, sponsor.name);
     sponsorData.append("status", sponsor.status);
     sponsorData.append("sponsorTitle", sponsor.sponsorTitle);
-    sponsorData.append("year", sponsor.date.year);
-    sponsorData.append("link", sponsor.date.link);
+    sponsorData.append("year", sponsor.year);
+    sponsorData.append("link", sponsor.link);
 
+      // console.log(sponsor);
 
     this.http
       .post<{ message: string; lec: Sponsor }>(
@@ -99,8 +100,8 @@ export class SponsorsService {
     SponsorData.append("imagePath", sponsor.image, sponsor.name);
     SponsorData.append("status", sponsor.status);
     SponsorData.append("sponsorTitle", sponsor.sponsorTitle);
-    SponsorData.append("year", sponsor.date.year);
-    SponsorData.append("link", sponsor.date.link);
+    SponsorData.append("year", sponsor.year);
+    SponsorData.append("link", sponsor.link);
     }
     else {
         SponsorData = {
