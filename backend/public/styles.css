@@ -1,0 +1,57 @@
+.navbar {
+  background-color: #000;
+
+}
+
+.navbar-toggler-icon {
+  color: #fff;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #fff;
+}
+
+.navbar-brand:hover {
+  color: #fff;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.nav-item {
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0 20px;
+}
+
+.nav-item:hover {
+  color: cyan;
+  text-decoration: none;
+}
+
+body {
+  background-color: #000;
+}
+
+.login-container {
+  margin: 160px auto;
+}
+
+.card {
+  height: 350px;
+  text-align: center;
+  border-radius: 25px;
+}
+
+.form-control {
+  margin-bottom: 30px;
+}
+
+.logo {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+  margin: 0 auto 15px;
+}
