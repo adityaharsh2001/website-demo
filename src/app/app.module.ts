@@ -1,4 +1,6 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserModule } from "@angular/platform-browser";
+
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from "ngx-toastr";
@@ -9,10 +11,12 @@ import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatExpansionModule } from "@angular/material/expansion";
+// import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+
 
 
 
@@ -49,17 +53,17 @@ import { CompetitionComponent } from './pages/competition/competition.component'
   ],
   imports: [
 
+    BrowserModule,
     BrowserAnimationsModule,
-
     RouterModule.forRoot(AppRoutes,{
       useHash: true
     }),
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     MatCardModule,
     MatToolbarModule,
     MatExpansionModule,
-    MatProgressSpinnerModule,
     SidebarModule,
     NavbarModule,
     ToastrModule.forRoot(),

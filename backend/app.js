@@ -10,6 +10,7 @@ const workshopsRoutes = require("./routes/workshop");
 const teamRoutes = require("./routes/team");
 const competitionRoutes = require("./routes/competition");
 const sponsorRoutes = require("./routes/sponsor");
+const dashboardRoutes = require("./routes/dashboard");
 
 const app = express();
 
@@ -49,5 +50,6 @@ app.use("/api/workshops", workshopsRoutes);
 app.use("/api/teams", teamRoutes);
 app.use("/api/competitions", competitionRoutes);
 app.use("/api/sponsors", sponsorRoutes);
+app.use("/api/dashboards", dashboardRoutes);
 
 module.exports = app;

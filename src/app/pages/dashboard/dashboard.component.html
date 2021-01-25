@@ -1,5 +1,7 @@
-<div class="row">
-  <div class="col-lg-3 col-md-6 col-sm-6">
+<!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
+<!-- <mat-spinner></mat-spinner> -->
+<div class="row" *ngIf="!isLoading">
+  <div class="col-lg-3 col-md-6 col-sm-6" >
     <div class="card card-stats">
       <div class="card-body ">
         <div class="row">
@@ -13,7 +15,7 @@
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Lectures</p>
-              <p class="card-title">10
+              <p class="card-title">{{this.dashboard.LectureCount}}
                 <p>
             </div>
           </div>
@@ -21,7 +23,7 @@
       </div>
       <div class="card-footer ">
         <hr>
-        
+
       </div>
     </div>
   </div>
@@ -38,7 +40,7 @@
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Workshop</p>
-              <p class="card-title">1,345
+              <p class="card-title">{{this.dashboard.WorkshopCount}}
                 <p>
             </div>
           </div>
@@ -46,7 +48,7 @@
       </div>
       <div class="card-footer ">
         <hr>
-        
+
       </div>
     </div>
   </div>
@@ -64,7 +66,7 @@
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Competitions</p>
-              <p class="card-title">23
+              <p class="card-title">{{this.dashboard.CompetitionsCount}}
                 <p>
             </div>
           </div>
@@ -72,7 +74,7 @@
       </div>
       <div class="card-footer ">
         <hr>
-        
+
       </div>
     </div>
   </div>
@@ -84,13 +86,13 @@
             <div class="icon-big text-center icon-warning">
               <span class="material-icons" style="font-size: 50px;">
                 groups
-                </span>           
+                </span>
                </div>
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Team</p>
-              <p class="card-title">45
+              <p class="card-title">{{this.dashboard.TeamCount}}
                 <p>
             </div>
           </div>
@@ -98,14 +100,14 @@
       </div>
       <div class="card-footer ">
         <hr>
-        
+
       </div>
     </div>
   </div>
 </div>
 
 
-<div class="row">
+<div class="row" *ngIf="!isLoading">
   <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="card card-stats">
       <div class="card-body ">
@@ -114,13 +116,13 @@
             <div class="icon-big text-center icon-warning">
               <span class="material-icons" style="font-size: 50px;">
                 local_see
-                </span>        
+                </span>
                   </div>
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
               <p class="card-category">Sponsor</p>
-              <p class="card-title">150
+              <p class="card-title">{{this.dashboard.SponsorCount}}
                 <p>
             </div>
           </div>
@@ -128,7 +130,7 @@
       </div>
       <div class="card-footer ">
         <hr>
-       
+
       </div>
     </div>
   </div>

@@ -69,11 +69,11 @@ exports.addCompetition = (req, res, next) => {
           b
         });
       });
-      
+
 };
 
 exports.deleteCompetiton = (req, res, next) =>{
-  Competiton.deleteOne({ _id: req.params.id }).then(result => {
+  Competition.deleteOne({ _id: req.params.id }).then(result => {
     // console.log(result);
     res.status(200).json({ message: "Competition deleted!" });
   }).catch(err => {
@@ -85,7 +85,7 @@ exports.deleteCompetiton = (req, res, next) =>{
 
 exports.findCompetiton = (req, res, next) =>{
   // console.log(req.params)
-  Competiton.findById(req.params.id).then(competiton => {
+  Competition.findById(req.params.id).then(competiton => {
     if (competiton) {
       res.status(200).json(competiton);
     } else {

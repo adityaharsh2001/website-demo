@@ -12,8 +12,10 @@
     <!-- <form [formGroup]="form" class="form-group" id="formLogin" name="formLogin" role="form" (submit) = "onSaveLecture($event)"> -->
     <form [formGroup]="form" class="form-group" id="formLogin" name="formLogin" role="form">
       <div class="form-group">
+        <!-- <mat-form-field appearance="fill"> -->
         <label for="uname1">Name of person</label>
-        <input formControlName="name" class="form-control" id="uname1" name="uname1" required="" type="text">
+        <input  matInput formControlName="name" class="form-control" id="uname1" name="uname1" required="" type="text">
+      <!-- </mat-form-field> -->
       </div>
       <div class="form-group">
         <label>Profession</label>

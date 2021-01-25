@@ -1,10 +1,10 @@
 export interface Dashboard {
-  lectureCount: string
-  workshopCount: string,
+  LectureCount: string
+  WorkshopCount: string,
 
-  Competitions: string,
-  Team: string,
-  sponsor:string,
+  CompetitionsCount: string,
+  TeamCount: string,
+  SponsorCount:string,
 }
 
 // time: string,
