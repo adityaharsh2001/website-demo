@@ -10,22 +10,37 @@
 
 
     <!-- <form [formGroup]="form" class="form-group" id="formLogin" name="formLogin" role="form" (submit) = "onSaveLecture($event)"> -->
-    <form [formGroup]="form" class="form-group" id="formLogin" name="formLogin" role="form">
-      <div class="form-group">
-        <!-- <mat-form-field appearance="fill"> -->
+    <form [formGroup]="form" class="mat-form-field" id="formLogin" name="formLogin" role="form">
+
+      <!-- <div class="form-group">
         <label for="uname1">Name of person</label>
         <input  matInput formControlName="name" class="form-control" id="uname1" name="uname1" required="" type="text">
-      <!-- </mat-form-field> -->
-      </div>
-      <div class="form-group">
+      </div> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label for="uname1">Name of person</mat-label>
+        <input matInput placeholder="Name" formControlName="name" id="uname1" name="uname1">
+      </mat-form-field><br>
+
+      <!-- <div class="form-group">
         <label>Profession</label>
         <input formControlName="profession" class="form-control" id="pwd1" required="" type="text">
-      </div>
+      </div> -->
 
-      <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Profession</mat-label>
+        <input matInput placeholder="Profession" formControlName="profession" id="pwd1">
+      </mat-form-field><br>
+
+      <!-- <div class="form-group">
         <label>Lecture Title</label>
         <input formControlName="lectureTitle" class="form-control" id="pwd1" required="" type="text">
-      </div>
+      </div> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Lecture Title</mat-label>
+        <input matInput placeholder="Lecture Title" formControlName="lectureTitle" id="pwd1">
+      </mat-form-field><br>
 
 
       <label for="dateOfBirth">Date</label>
@@ -50,10 +65,8 @@
      </mat-form-field> -->
 
 
-
-
-      <div class="form-group">
-        <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+      <div class="mat-form-field img-btn">
+        <button mat-stroked-button class="img-pick" color="primary" type="button" (click)="filePicker.click()">Pick Image</button>
         <input type="file" name = "image" #filePicker (change)="onImagePicked($event)">
       </div>
       <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
@@ -64,9 +77,7 @@
       </div>
 
 
-
-
-      <div class="form-group">
+      <div class="mat-form-field">
         <label>Status</label>
         <!-- <button class="status mat-radio-button"  mat-raised-button color="primary">Upcoming</button>
           <button class="status mat-radio-button"  mat-raised-button color="warn">Done</button>
@@ -77,16 +88,20 @@
 
       </div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>Registration Link</label>
         <input formControlName="regLink" class="form-control" id="pwd1" required="" type="text">
-      </div>
+      </div> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Registration Link</mat-label>
+        <input matInput placeholder="Link" formControlName="regLink" id="pwd1">
+      </mat-form-field><br>
 
 
 
       <div class="modal-footer">
-        <button class="btn btn-success btn-lg float-right" type="submit"
-          (click)="modal.close('Save click'); onSaveLecture($event)">Save</button>
+        <button  mat-raised-button color="primary" type="submit" (click)="modal.close('Save click'); onSaveLecture($event)" class="btn-save">Save</button>
       </div>
       <!-- <button class="btn btn-success btn-lg float-right" type="button">Login</button> -->
     </form>
