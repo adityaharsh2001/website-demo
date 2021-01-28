@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    cb(error, "backend/images");
+    cb(error, "backend/images/lectures");
   },
   filename: (req, file, cb) => {
     const name = file.originalname
@@ -68,7 +68,7 @@ exports.addLectures = async (req, res, next) => {
       },
       regLink: req.body.regLink,
       status: req.body.status,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/lectures/" + req.file.filename
     });
     // imagePath: result.public_id,
 
@@ -115,7 +115,7 @@ exports.updateLecture = (req, res, next) =>{
     // console.log(req.file);
     const url = req.protocol + "://" + req.get("host");
     if (req.file) {
-      imagePath = url + "/images/" + req.file.filename
+      imagePath = url + "/images/lectures/" + req.file.filename
     }
     // lectureId = req.body._id;
     const lecture = new Lecture({
@@ -131,7 +131,7 @@ exports.updateLecture = (req, res, next) =>{
       },
       regLink: req.body.regLink,
       status: req.body.status,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/lectures/" + req.file.filename
     });
 
     // console.log(lecture);

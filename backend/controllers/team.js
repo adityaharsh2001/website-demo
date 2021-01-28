@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    cb(error, "backend/images");
+    cb(error, "backend/images/team/");
   },
   filename: (req, file, cb) => {
     const name = file.originalname
@@ -56,7 +56,7 @@ exports.addTeam = (req, res, next) => {
       mailId: req.body.mailId,
       linkedin: req.body.linkedin,
       contact: req.body.contact,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/team/" + req.file.filename
     });
 
       b = req.body
@@ -100,7 +100,7 @@ exports.updateTeam = (req, res, next) =>{
     // console.log(req.file);
     const url = req.protocol + "://" + req.get("host");
     if (req.file) {
-      imagePath = url + "/images/" + req.file.filename;
+      imagePath = url + "/images/team/" + req.file.filename;
     }
     // teamId = req.body._id;
     const team = new Team({
@@ -110,7 +110,7 @@ exports.updateTeam = (req, res, next) =>{
       year: req.body.year,
       linkedin: req.body.linkedin,
       contact: req.body.contact,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/team/" + req.file.filename
     });
 
     // console.log(team);

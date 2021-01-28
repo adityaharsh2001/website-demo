@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    cb(error, "backend/images");
+    cb(error, "backend/images/competition/");
   },
   filename: (req, file, cb) => {
     const name = file.originalname
@@ -59,7 +59,7 @@ exports.addCompetition = (req, res, next) => {
       },
       regLink: req.body.regLink,
       status: req.body.status,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/competition/" + req.file.filename
     });
 
       b = req.body
@@ -99,7 +99,7 @@ exports.updateCompetiton = (req, res, next) =>{
     // console.log(req.file);
     const url = req.protocol + "://" + req.get("host");
     if (req.file) {
-      imagePath = url + "/images/" + req.file.filename;
+      imagePath = url + "/images/competition/" + req.file.filename;
     }
     // competitonId = req.body._id;
     const competiton = new Competiton({
@@ -113,13 +113,10 @@ exports.updateCompetiton = (req, res, next) =>{
       },
       regLink: req.body.regLink,
       status: req.body.status,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/competition/" + req.file.filename
     });
 
-    // console.log(competiton);
-    // console.log(req.body._id);
-    // console.log(req.body);
-    // console.log(req.params.id);
+
     Competiton.updateOne({ _id:req.params.id }, competiton).then(result => {
       res.status(200).json({ message: "Update successful!" });
     });

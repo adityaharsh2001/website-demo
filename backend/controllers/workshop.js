@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    cb(error, "backend/images");
+    cb(error, "backend/images/workshop/");
   },
   filename: (req, file, cb) => {
     const name = file.originalname
@@ -59,7 +59,7 @@ exports.addWorkshops = (req, res, next) => {
       regLink: req.body.regLink,
       status: req.body.status,
       price: req.body.price,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/workshop/" + req.file.filename
     });
 
       b = req.body
@@ -98,7 +98,7 @@ exports.updateWorkshop = (req, res, next) =>{
     // console.log(req.file);
     const url = req.protocol + "://" + req.get("host");
     if (req.file) {
-      imagePath = url + "/images/" + req.file.filename;
+      imagePath = url + "/images/workshop/" + req.file.filename;
     }
     // workshopId = req.body._id;
     const workshop = new Workshop({
@@ -113,7 +113,7 @@ exports.updateWorkshop = (req, res, next) =>{
       regLink: req.body.regLink,
       status: req.body.status,
       price: req.body.price,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/workshop/" + req.file.filename
     });
 
     // console.log(workshop);

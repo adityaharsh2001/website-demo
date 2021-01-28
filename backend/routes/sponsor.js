@@ -12,7 +12,7 @@ const MIME_TYPE_MAP = {
     "image/jpeg": "jpg",
     "image/jpg": "jpg"
   };
-  
+
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       const isValid = MIME_TYPE_MAP[file.mimetype];
@@ -20,7 +20,7 @@ const MIME_TYPE_MAP = {
       if (isValid) {
         error = null;
       }
-      cb(error, "backend/images");
+      cb(error, "backend/images/sponsor/");
     },
     filename: (req, file, cb) => {
       const name = file.originalname

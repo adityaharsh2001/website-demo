@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    cb(error, "backend/images");
+    cb(error, "backend/images/sponsor/");
   },
   filename: (req, file, cb) => {
     const name = file.originalname
@@ -54,7 +54,7 @@ exports.addSponsor = (req, res, next) => {
       year: req.body.year,
       link: req.body.link,
       status: req.body.status,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/sponsor/" + req.file.filename
     });
 
       b = req.body
@@ -93,7 +93,7 @@ exports.updateSponsor = (req, res, next) =>{
     // console.log(req.file);
     const url = req.protocol + "://" + req.get("host");
     if (req.file) {
-      imagePath = url + "/images/" + req.file.filename;
+      imagePath = url + "/images/sponsor/" + req.file.filename;
     }
     // sponsorId = req.body._id;
     const sponsor = new Sponsor({
@@ -103,7 +103,7 @@ exports.updateSponsor = (req, res, next) =>{
       year: req.body.year,
       link: req.body.link,
       status: req.body.status,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/sponsor/" + req.file.filename
     });
 
     // console.log(sponsor);
