@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    cb(error, "backend/images/competition/");
+    cb(error, "backend/images/competition");
   },
   filename: (req, file, cb) => {
     const name = file.originalname
