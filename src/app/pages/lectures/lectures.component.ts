@@ -187,4 +187,3 @@ export class LecturesComponent implements OnInit {
     this.lecturesSub.unsubscribe();
   }
 }
-

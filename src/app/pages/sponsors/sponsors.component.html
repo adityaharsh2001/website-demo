@@ -10,23 +10,37 @@
   <div class="modal-body slide-in-fwd-center">
 
 
-    <form  [formGroup]="form" class="form-group" id="formLogin" name="formLogin" role="form">
-      <div class="form-group">
+    <form  [formGroup]="form" class="mat-form-field" id="formLogin" name="formLogin" role="form">
+      <!-- <div class="form-group">
         <label for="uname1">sponsorName </label>
         <input formControlName="sponsorName" class="form-control" id="uname1" name="uname1" required="" type="text">
-      </div>
-      <div class="form-group">
+      </div> -->
+      <mat-form-field appearance="outline">
+        <mat-label for="uname1">Sponsor Name</mat-label>
+        <input matInput placeholder="Ex: Ballebaazi" formControlName="sponsorName" id="uname1" name="uname1">
+      </mat-form-field><br>
+
+      <mat-form-field appearance="outline">
+        <mat-label for="uname1">Sponsor Title</mat-label>
+        <input matInput placeholder="Ex: Ballebaazi" formControlName="sponsorTitle" id="pwd1">
+      </mat-form-field><br>
+      <!-- <div class="form-group">
         <label>sponsorTitle</label>
         <input  formControlName="sponsorTitle"class="form-control" id="pwd1" required="" type="text">
-      </div>
+      </div> -->
 
-      <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label for="uname1">Year</mat-label>
+        <input matInput placeholder="Ex: 2021" formControlName="year" id="pwd1">
+      </mat-form-field><br>
+
+      <!-- <div class="form-group">
         <label>year</label>
         <input formControlName="year"  class="form-control" id="pwd1" required="" type="text">
-      </div>
+      </div> -->
 
-      <div class="form-group">
-        <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+      <div class="mat-form-field">
+        <button mat-stroked-button class="img-pick" color="primary" type="button" (click)="filePicker.click()">Pick Image</button>
         <input type="file" name = "image" #filePicker (change)="onImagePicked($event)">
       </div>
       <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
@@ -34,34 +48,35 @@
       </div>
       <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').invalid">
         <mat-error *ngIf="form.get('image').invalid">Please select an Image</mat-error>
-      </div>
+      </div><br>
 
 
-      <div class="form-group">
-        <label>Status</label>
+      <div class="mat-form-field">
+        <mat-label>Status</mat-label>
         <!-- <button class="status mat-radio-button"  mat-raised-button color="primary">Upcoming</button>
           <button class="status mat-radio-button"  mat-raised-button color="warn">Done</button>
           <mat-radio-group aria-label="Select an option"> -->
         <mat-radio-button class="status" type="button" (click)="Upcoming()" value="1">Upcoming</mat-radio-button>
         <mat-radio-button class="status" type="button" (click)="Done()" value="2">Done</mat-radio-button>
         <!-- </mat-radio-group> -->
-
       </div>
 
 
-
-
-      <div class="form-group">
-        <label>link</label>
+      <!-- <div class="form-group">
+        <label>Link</label>
         <input formControlName="link" class="form-control" id="pwd1" required="" type="text">
-      </div>
+      </div> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Link</mat-label>
+        <input matInput placeholder="Ex: ballebaazi.com" formControlName="link" id="pwd1">
+      </mat-form-field><br>
 
 
 
 
       <div class="modal-footer">
-        <button class="btn btn-success btn-lg float-right" type="submit"
-          (click)="modal.close('Save click'); onSaveSponsor($event)">Save</button>
+        <button mat-raised-button color="primary" type="submit" (click)="modal.close('Save click'); onSaveLecture($event)" class="btn-save">Save</button>
       </div>
     </form>
   </div>
@@ -154,4 +169,3 @@
 </div>
 
 </div>
-
