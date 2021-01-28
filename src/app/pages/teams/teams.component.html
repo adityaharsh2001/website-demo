@@ -10,23 +10,39 @@
     <div class="modal-body slide-in-fwd-center">
 
 
-      <form  [formGroup]="form" class="form-group" id="formLogin" name="formLogin" role="form">
-        <div class="form-group">
+      <form  [formGroup]="form" id="formLogin" name="formLogin" role="form">
+        <!-- <div class="form-group">
           <label for="uname1">Name </label>
           <input formControlName="name" class="form-control" id="uname1" name="uname1" required="" type="text">
-        </div>
-        <div class="form-group">
+        </div> -->
+
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Ex: INNOVA DTU" formControlName="name" id="uname1" name="uname1">
+        </mat-form-field><br>
+
+        <!-- <div class="form-group">
           <label>Designation</label>
           <input  formControlName="designation"class="form-control" id="pwd1" required="" type="text">
-        </div>
+        </div> -->
 
-        <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Designation</mat-label>
+          <input matInput placeholder="Ex: INNOVA DTU" formControlName="designation" id="pwd1">
+        </mat-form-field><br>
+
+        <!-- <div class="form-group">
           <label>Linkedin</label>
           <input formControlName="linkedin"  class="form-control" id="pwd1" required="" type="text">
-        </div>
+        </div> -->
 
-        <div class="form-group">
-          <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+        <mat-form-field appearance="outline">
+          <mat-label>Linkedin</mat-label>
+          <input matInput placeholder="Ex: linkedin.com/innovadtu" formControlName="linkedin" id="pwd1">
+        </mat-form-field><br>
+
+        <div class="mat-form-field">
+          <button mat-stroked-button class="img-pick" type="button" color="primary" (click)="filePicker.click()">Pick Image</button>
           <input type="file" name = "image" #filePicker (change)="onImagePicked($event)">
         </div>
         <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
@@ -37,26 +53,31 @@
         </div>
 
 
-
-
-
-
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label>Mail Id</label>
           <input formControlName="mailId" class="form-control" id="pwd1" required="" type="text">
-        </div>
+        </div> -->
 
-        <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Mail Id</mat-label>
+          <input matInput placeholder="Ex: innovadtu2021@gmail.com" formControlName="mailId" id="pwd1">
+        </mat-form-field><br>
+
+        <!-- <div class="form-group">
           <label>Contact</label>
           <input formControlName="contact" class="form-control" id="pwd1" required="" type="text">
-        </div>
+        </div> -->
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contact</mat-label>
+          <input matInput placeholder="Phone Number" formControlName="contact" id="pwd1">
+        </mat-form-field><br>
 
 
 
 
         <div class="modal-footer">
-          <button class="btn btn-success btn-lg float-right" type="submit"
-            (click)="modal.close('Save click'); onSaveTeam($event)">Save</button>
+          <button mat-raised-button color="primary" type="submit" (click)="modal.close('Save click'); onSaveLecture($event)" class="btn-save">Save</button>
         </div>
       </form>
     </div>
@@ -149,4 +170,3 @@
   </div>
 
 </div>
-
