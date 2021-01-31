@@ -8,6 +8,7 @@ import { WorkshopComponent } from '../../pages/workshop/workshop.component';
 import { TeamsComponent } from '../../pages/teams/teams.component';
 import { SponsorsComponent } from '../../pages/sponsors/sponsors.component';
 import { CompetitionComponent } from '../../pages/competition/competition.component';
+// import { LoginComponent } from '../../pages/auth/login/login.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -16,7 +17,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'workshop',        component: WorkshopComponent },
     { path: 'teams',        component: TeamsComponent },
     { path: 'sponsors',        component: SponsorsComponent },
-    { path: 'competition',        component: CompetitionComponent }
+    { path: 'competition',        component: CompetitionComponent },
+    // {path: 'login',                  component:LoginComponent}
 
 
 

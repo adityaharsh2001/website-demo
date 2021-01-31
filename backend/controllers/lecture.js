@@ -2,8 +2,8 @@ const express = require("express");
 const multer = require("multer");
 const lecture = require("../models/lecture");
 
-const cloudinary = require("../utils/cloudinary");
-const upload = require("../utils/multer");
+// const cloudinary = require("../utils/cloudinary");
+// const upload = require("../utils/multer");
 
 const Lecture = require("../models/lecture");
 

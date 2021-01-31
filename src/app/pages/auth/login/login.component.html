@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+  <div class="container-fluid">
+
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="https://innovadtu.com/home">INNOVA DTU</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://innovadtu.com/lectures">Lectures</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://innovadtu.com/competitions">Competitions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://innovadtu.com/workshops">Workshops</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://innovadtu.com/sponsors">Sponsors</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://innovadtu.com/team">Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://innovadtu.com/contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+
+  <div class="container-fluid">
+    <div class="row" style="max-width: 100vw;">
+
+      <div class="col-lg-4 col-sm-12 login-container" id="login-container">
+        <form class="card p-3" id="main-form" #loginForm="ngForm" >
+            <img src="assets/img/InnovaLogo.png" class="logo" alt="INNOVA LOGIN">
+
+
+            <div id="username-container" class="">
+
+              <label for="username" class="form-label">Username</label>
+              <input  type="text" ngModel name="username" placeholder="Enter your Username" id="username" class="form-control" #usernameInput="ngModel" required>
+            </div>
+
+            <div *ngIf="userCorrect" id="otp-container" class="" >
+              <label for="otp" class="form-label">OTP</label>
+              <input type="password" ngModel name="otp" placeholder="Enter the OTP" id="otp" class="form-control" #otpInput="ngModel" required >
+            </div>
+
+            <button *ngIf="userCorrect" class="btn btn-lg btn-dark mt-2">Submit</button>
+            <button (click)="checkUser(loginForm)" class="btn btn-lg btn-dark mt-2">Send OTP</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    const mainForm = document.querySelector('#main-form');
+    const username = document.querySelector('#username');
+    const usernameContainer = document.querySelector('#username-container');
+    const otp = document.querySelector('#otp');
+    const otpContainer = document.querySelector('#otp-container');
+    const loginContainer = document.querySelector('#login-container');
+
+    async function getLogin(){
+      const res = await fetch('/login',{
+        // mode: 'no-cors'
+      })
+      return res.text();
+    }
+
+    async function postLogin(field){
+      const res = await fetch('/login',{
+        // mode: 'no-cors',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `field=${field}`
+      })
+      return res.text();
+    };
+
+    function addAlert(message){
+      const div = document.createElement('div');
+      div.classList.add('alert','alert-dismissible','alert-danger','fade','show');
+      div.innerHTML = `
+        ${message}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>`;
+      const closeBtn = div.querySelector('.close');
+      setTimeout(() => {
+        closeBtn.click();
+      },2000);
+      loginContainer.prepend(div);
+    }
+
+    mainForm.addEventListener('submit',async function(e){
+      e.preventDefault();
+      if(usernameContainer.classList.contains('hide')){
+        //confirm otp
+        const body = await postLogin(otp.value);
+        if(body === '1'){
+          //correct otp
+          window.location.replace('http://www.innovadtu.com');
+        }else{
+          //incorrect otp
+          addAlert('Incorrect OTP');
+        }
+      }else{
+        //confirm username
+        const body = await postLogin(username.value);
+        if(body === '3'){
+          //correct username
+          usernameContainer.classList.add('hide');
+          otpContainer.classList.remove('hide');
+        }else{
+          //incorrect username
+          addAlert('Incorrect Username');
+        }
+      }
+      username.value = "";
+      otp.value = "";
+    });
+
+    (async function(){
+      const body = await getLogin();
+      if(body === 'username'){
+        otpContainer.classList.add('hide');
+      }else if(body === 'otp'){
+        usernameContainer.classList.add('hide');
+      }else {
+        //already logged in
+        window.location.replace('http://www.innovadtu.com');
+      }
+    })()
+  </script>
+</body>
+
+</html>
