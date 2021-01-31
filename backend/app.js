@@ -3,6 +3,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const config = require("../config.json");
+// const PROCESS = require("../config.json");
+const dotenv = require('dotenv')
 
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -25,7 +27,7 @@ const app = express();
 databaseUrl = config.db.url;
 mongoose
   .connect(
-    databaseUrl
+    databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
     console.log("Connected to database!");
@@ -34,11 +36,11 @@ mongoose
     console.log("Connection failed!");
   });
 
-app.set('views',path.join(__dirname,'views'));
+// app.set('views',path.join(__dirname,'views'));
 // app.set('view engine','ejs');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+
 app.use(express.static(path.join(__dirname,'public')));
 app.use("/images", express.static(path.join("backend/images")));
 
@@ -57,14 +59,6 @@ app.use((req, res, next) => {
 });
 
 const usernameHash = '$2b$12$Fn/oeILxMCUKl2lorWc9X.tlZ.LfieUZMk/KiBYnJIUnf3PAKCLNq'
-// bcrypt.hash('hello',12,function(err,hash){
-//     if(err){
-//         console.log(err);
-//         process.exit(1);
-//     }
-//     usernameHash = hash;
-//     console.log(usernameHash);
-// })
 
 app.use(express.urlencoded({extended:true}));
 app.use(session({
@@ -98,7 +92,6 @@ app.post('/login',(req,res) => {
 
     const {field} = req.body;
     console.log(req.body);
-    console.log(field);
     if(req.session.isAuthenticated){
         //already authenticated;
         res.send('0');
@@ -128,7 +121,6 @@ app.post('/login',(req,res) => {
                         service: 'gmail',
                         secure: true,
                         auth: {
-                          type: "login",
                             user: config.fromMail,    // Set this in environment var
                             pass: config.pass  // Set this in environment var
                         }
@@ -159,6 +151,8 @@ app.post('/logout',(req,res) => {
         res.status(400).send('please login first');
     }
 });
+
+
 
 
 app.use("/api/lectures", lecturesRoutes);

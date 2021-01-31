@@ -36,7 +36,7 @@ export class AuthService {
     let res = "";
     return this.http
       .post<{ token: string }>(
-        "http://localhost:5000/login",
+        "http://localhost:3000/login",
         authData
       );
 
