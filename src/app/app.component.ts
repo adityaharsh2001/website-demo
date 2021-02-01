@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './pages/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent{}
+export class AppComponent{
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.authService.autoAuthUser();
+  }
+}

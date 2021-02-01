@@ -9,21 +9,20 @@ import { AuthService } from "../auth.service";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  userCorrect: boolean = false;
-  form: FormGroup;
-  constructor(public authService: AuthService) { }
 
-  ngOnInit() {
+  isLoading = false;
 
-  }
-  checkUser(form: NgForm){
+  constructor(public authService: AuthService) {}
 
-    console.log(form.value.username);
-    this.authService.checkingUser(form.value.username).subscribe(response =>{
-      console.log(response);
-    });
+  onLogin(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+    console.log(form.value);
+    this.isLoading = true;
+    this.authService.login(form.value.email, form.value.password);
 
   }
 

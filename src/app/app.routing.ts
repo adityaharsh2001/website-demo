@@ -1,12 +1,11 @@
 import { Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {LoginComponent} from './pages/auth/login/login.component';
 
-// {
-//   path: 'login',
-//   redirectTo: 'login'
-// },
+import { AuthGuard } from "./pages/auth/auth.guard";
+
 export const AppRoutes: Routes = [
   {
     path: 'login',
@@ -16,9 +15,11 @@ export const AppRoutes: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
+     canActivate: [AuthGuard]
   }, {
     path: '',
     component: AdminLayoutComponent,
+    // canActivate: [AuthGuard],
     children: [
         {
       path: '',
@@ -26,7 +27,15 @@ export const AppRoutes: Routes = [
   }]},
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'dashboard',
+    canActivate: [AuthGuard]
   }
 
 ]
+
+@NgModule({
+
+  providers: [AuthGuard]
+})
+export class AppRoutingModule {}
+

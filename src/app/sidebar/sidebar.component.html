@@ -17,5 +17,11 @@
                 <p>{{menuItem.title}}</p>
             </a>
         </li>
+
+
     </ul>
+    <li *ngIf="userIsAuthenticated">
+      <button mat-button (click)="onLogout()">Logout</button>
+    </li>
+    
 </div>

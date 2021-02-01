@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 
 import { AuthData } from "./auth-data.model";
-import { stringify } from "@angular/compiler/src/util";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -29,19 +28,28 @@ export class AuthService {
 
 
 
-
-
-  checkingUser(username: string) {
-    const authData: AuthData = { field: username};
-    let res = "";
-    return this.http
-      .post<{ token: string }>(
-        "http://localhost:3000/login",
+  login(email: string, password: string) {
+    const authData: AuthData = { email: email, password: password };
+    this.http
+      .post<{ token: string; expiresIn: number }>(
+        "http://localhost:5000/api/user/login",
         authData
-      );
-
-
-
+      )
+      .subscribe(response => {
+        const token = response.token;
+        this.token = token;
+        if (token) {
+          const expiresInDuration = response.expiresIn;
+          this.setAuthTimer(expiresInDuration);
+          this.isAuthenticated = true;
+          this.authStatusListener.next(true);
+          const now = new Date();
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+          console.log(expirationDate);
+          this.saveAuthData(token, expirationDate);
+          this.router.navigate(["/"]);
+        }
+      });
   }
 
   autoAuthUser() {
@@ -60,12 +68,13 @@ export class AuthService {
   }
 
   logout() {
+    console.log("logout");
     this.token = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    this.router.navigate(["/"]);
+    this.router.navigate(["/login"]);
   }
 
   private setAuthTimer(duration: number) {

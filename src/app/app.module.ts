@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from "ngx-toastr";
 import { ReactiveFormsModule, NgForm, FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule , HTTP_INTERCEPTORS} from "@angular/common/http";
 
 import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
@@ -40,9 +40,9 @@ import { TeamsComponent } from './pages/teams/teams.component';
 import { SponsorsComponent } from './pages/sponsors/sponsors.component';
 import { CompetitionComponent } from './pages/competition/competition.component';
 import { LoginComponent } from './pages/auth/login/login.component';
-// import { LoginComponent } from "./pages/auth/login/login.component";
 
-// LoginComponent
+import { AuthInterceptor } from "../app/pages/auth/auth-interceptor";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +62,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
       useHash: true
     }),
     ReactiveFormsModule,
-   
+
     FormsModule,
     MatProgressSpinnerModule,
     MatInputModule,
@@ -83,7 +83,9 @@ import { LoginComponent } from './pages/auth/login/login.component';
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

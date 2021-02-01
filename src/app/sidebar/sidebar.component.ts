@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Subscription } from "rxjs";
+
+import { AuthService } from "../pages/auth/auth.service";
 
 export interface RouteInfo {
     path: string;
@@ -32,7 +35,28 @@ export const ROUTES: RouteInfo[] = [
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+
+
+    userIsAuthenticated = false;
+    private authListenerSubs: Subscription;
+
+    constructor(private authService: AuthService) {}
+
     ngOnInit() {
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-    }
+    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authListenerSubs = this.authService
+      .getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        this.userIsAuthenticated = isAuthenticated;
+      });
+  }
+
+  onLogout() {
+    this.authService.logout();
+  }
+
+  ngOnDestroy() {
+    this.authListenerSubs.unsubscribe();
+  }
 }

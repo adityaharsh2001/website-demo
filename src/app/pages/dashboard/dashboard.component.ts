@@ -9,6 +9,7 @@ import { Dashboard } from "./dashboard.model";
 import {DashboardService } from "./dashboard.service";
 import { DatePipe, getLocaleDateFormat } from '@angular/common';
 import {  OnDestroy } from "@angular/core";
+import { AuthService } from "../auth/auth.service";
 
 
 
@@ -18,38 +19,45 @@ import {  OnDestroy } from "@angular/core";
     templateUrl: 'dashboard.component.html'
 })
 
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit ,OnDestroy{
   private dashboardsSub: Subscription;
   dashboards: Dashboard[] = [];
   private mode = "create";
   isLoading = true;
+  userIsAuthenticated = false;
+  private authStatusSub: Subscription;
 
   dashboard: Dashboard;
-  constructor(private modalService: NgbModal, public dashboardsService: DashboardService,) {}
+  constructor(private modalService: NgbModal, public dashboardsService: DashboardService,private authService: AuthService) {}
 
 
     ngOnInit(){
-
+      this.isLoading = true;
       this.dashboardsService.getCount().subscribe(Data => {
         // console.log(Data);
         this.dashboard = Data.number;
         console.log(this.dashboard);
         this.isLoading = false;
-        // this.dashboard = {
 
-        //   LectureCount :  Data.number.LectureCount,
-        //   WorkshopCount: Data.number.WorkshopCount,
-        //   TeamCount: Data.number.TeamCount,
-        //   SponsorCount: Data.number.SponsorCount,
-        //   CompetitionsCount: Data.number.CompetitionsCount}
-        //
       }
         );
 
+        this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authStatusSub = this.authService
+      .getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        this.userIsAuthenticated = isAuthenticated;
+      });
 
 
       }
 
 
+      ngOnDestroy() {
+        
+        this.authStatusSub.unsubscribe();
+      }
 }
+
+
 
