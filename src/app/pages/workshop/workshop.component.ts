@@ -72,6 +72,9 @@ export class WorkshopComponent implements OnInit {
         image: new FormControl(null, {
           validators: [Validators.required],
           asyncValidators: [mimeType]
+        }),
+        time: new FormControl(null, {
+          validators: [Validators.required, Validators.minLength(3)]
         })
       }
     )
@@ -120,7 +123,8 @@ export class WorkshopComponent implements OnInit {
       "regLink": this.form.value.regLink,
       "status": this.status,
       "price": this.form.value.price,
-      "image": this.form.value.image
+      "image": this.form.value.image,
+      "time":this.form.value.time
     }
     // "imagePath": this.form.value.name
 
@@ -163,7 +167,8 @@ export class WorkshopComponent implements OnInit {
             },
             status: workshopData.status,
             price: workshopData.price,
-            regLink: workshopData.regLink
+            regLink: workshopData.regLink,
+            time: workshopData.time
           };
           // console.log(this.lecture);
           this.imagePreview = this.workshop.imagePath;
@@ -175,6 +180,7 @@ export class WorkshopComponent implements OnInit {
             date:this.workshop.date,
             regLink: this.workshop.regLink,
             image: this.workshop.imagePath,
+            time: this.workshop.time
           }
 
           );

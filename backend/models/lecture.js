@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const lectureSchema = mongoose.Schema({
-  
+
   name: { type: String, required: true },
   profession: { type: String, required: true },
   status: {type: String, required: true},
@@ -12,11 +12,11 @@ const lectureSchema = mongoose.Schema({
     day: {type : String, requied: true}
   },
   regLink: {type: String, required: true},
-  imagePath: { type: String, required: true }
+  imagePath: { type: String, required: true },
+  time: {type: String, required: true},
 });
 
 
-// time: {type: String, required: true},
 // date: {
 //   type: String, required: true
 // },

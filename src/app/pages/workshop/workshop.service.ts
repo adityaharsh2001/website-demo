@@ -29,7 +29,8 @@ export class WorkshopsService {
             price:workshop.price,
             date:workshop.date,
             status:workshop.status,
-            regLink:workshop.regLink
+            regLink:workshop.regLink,
+            time: workshop.time
           };
         });
       })
@@ -59,7 +60,8 @@ export class WorkshopsService {
           day:string
         },
         status: string,
-        regLink: string
+        regLink: string,
+        time: string
     }>(
       "http://localhost:5000/api/workshops/" + id
     );
@@ -78,6 +80,7 @@ export class WorkshopsService {
     workshopData.append("day", workshop.date.day);
     workshopData.append("status", workshop.status);
     workshopData.append("regLink", workshop.regLink);
+    workshopData.append("time", workshop.time);
 
 
     this.http
@@ -112,6 +115,7 @@ export class WorkshopsService {
       WorkshopData.append("date", workshop.date);
       WorkshopData.append("time", workshop.time);
       WorkshopData.append("regLink", workshop.regLink);
+
     }
     else {
         WorkshopData = {
@@ -123,6 +127,7 @@ export class WorkshopsService {
             date:workshop.date,
             regLink:workshop.regLink,
             status:workshop.status,
+            time: workshop.time
           };
     }
     this.http

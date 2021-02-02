@@ -9,6 +9,7 @@ export interface Competition {
     month: string,
     day:string
   },
-  regLink: string
+  regLink: string,
+  time: string,
 }
 // time: string,

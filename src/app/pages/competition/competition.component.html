@@ -87,6 +87,10 @@
         <input matInput placeholder="Ex: bit.ly/12a3bc5" formControlName="regLink" id="pwd1">
       </mat-form-field>
 
+      <mat-form-field appearance="outline">
+        <mat-label>Time</mat-label>
+        <input matInput placeholder="Time" formControlName="time" id="pwd1">
+      </mat-form-field><br>
 
 
       <div class="modal-footer">
@@ -127,6 +131,10 @@
                 Date
               </th>
               <th>
+                time
+              </th>
+
+              <th>
                 Status
               </th>
               <th>
@@ -152,6 +160,9 @@
 
                 <td>
                   {{ competition.date.day}}/{{competition.date.month}}/{{competition.date.year}}
+                </td>
+                <td>
+                  {{ competition.time}}
                 </td>
                 <td>
                   {{ competition.status }}

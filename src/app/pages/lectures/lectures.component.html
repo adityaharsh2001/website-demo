@@ -92,10 +92,14 @@
         <label>Registration Link</label>
         <input formControlName="regLink" class="form-control" id="pwd1" required="" type="text">
       </div> -->
-
       <mat-form-field appearance="outline">
         <mat-label>Registration Link</mat-label>
         <input matInput placeholder="Link" formControlName="regLink" id="pwd1">
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline">
+        <mat-label>Time</mat-label>
+        <input matInput placeholder="Time" formControlName="time" id="pwd1">
       </mat-form-field><br>
 
 
@@ -140,8 +144,12 @@
                 Date
               </th>
               <th>
+                time
+              </th>
+              <th>
                 Status
               </th>
+
               <th>
                 Registration Link
               </th>
@@ -167,6 +175,9 @@
                 </td>
                 <td>
                   {{ lecture.date.day}}/{{lecture.date.month}}/{{lecture.date.year}}
+                </td>
+                <td>
+                  {{ lecture.time}}
                 </td>
                 <td>
                   {{ lecture.status }}

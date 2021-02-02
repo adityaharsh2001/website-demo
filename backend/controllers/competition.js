@@ -59,7 +59,8 @@ exports.addCompetition = (req, res, next) => {
       },
       regLink: req.body.regLink,
       status: req.body.status,
-      imagePath: url + "/images/competition/" + req.file.filename
+      imagePath: url + "/images/competition/" + req.file.filename,
+      time: req.body.time
     });
 
       b = req.body
@@ -113,7 +114,8 @@ exports.updateCompetiton = (req, res, next) =>{
       },
       regLink: req.body.regLink,
       status: req.body.status,
-      imagePath: url + "/images/competition/" + req.file.filename
+      imagePath: url + "/images/competition/" + req.file.filename,
+      time: req.body.time
     });
 
 

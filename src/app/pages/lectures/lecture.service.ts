@@ -29,8 +29,8 @@ export class LecturesService {
             status: lecture.status,
             date: lecture.date,
             regLink: lecture.regLink,
-            lectureTitle: lecture.lectureTitle
-
+            lectureTitle: lecture.lectureTitle,
+            time: lecture.time
           };
         });
       })
@@ -57,6 +57,7 @@ export class LecturesService {
       imagePath:string;
       regLink:string;
       lectureTitle:string;
+      time: string;
     }>(
       "http://localhost:5000/api/lectures/" + id
     );
@@ -74,7 +75,7 @@ export class LecturesService {
     lectureData.append("month", lecture.date.month);
     lectureData.append("day", lecture.date.day);
     lectureData.append("imagePath", lecture.image, lecture.name);
-
+    lectureData.append("time", lecture.time);
 
     this.http
       .post<{ message: string; lec: Lecture }>(
@@ -110,6 +111,7 @@ export class LecturesService {
     LectureData.append("regLink", lecture.regLink);
     LectureData.append("status", (lecture.status).toString());
     LectureData.append("imagePath", lecture.image, lecture.name);
+    LectureData.append("time", lecture.time);
     }
     else {
       LectureData = {
@@ -124,7 +126,8 @@ export class LecturesService {
           year: lecture.date.year,
           month: lecture.date.month
         },
-        imagePath: image
+        imagePath: image,
+        time: lecture.time
       };
     }
     this.http

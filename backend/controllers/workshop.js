@@ -59,7 +59,8 @@ exports.addWorkshops = (req, res, next) => {
       regLink: req.body.regLink,
       status: req.body.status,
       price: req.body.price,
-      imagePath: url + "/images/workshop/" + req.file.filename
+      imagePath: url + "/images/workshop/" + req.file.filename,
+      time: req.body.time
     });
 
       b = req.body
@@ -113,7 +114,8 @@ exports.updateWorkshop = (req, res, next) =>{
       regLink: req.body.regLink,
       status: req.body.status,
       price: req.body.price,
-      imagePath: url + "/images/workshop/" + req.file.filename
+      imagePath: url + "/images/workshop/" + req.file.filename,
+      time: req.body.time
     });
 
     // console.log(workshop);

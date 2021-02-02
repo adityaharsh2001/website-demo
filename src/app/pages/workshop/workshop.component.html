@@ -82,6 +82,10 @@
               <input matInput placeholder="Link" formControlName="regLink" id="pwd1">
             </mat-form-field><br>
 
+            <mat-form-field appearance="outline">
+              <mat-label>Time</mat-label>
+              <input matInput placeholder="Time" formControlName="time" id="pwd1">
+            </mat-form-field><br>
 
             <!-- <div class="modal-footer">
               <button class="btn btn-success btn-lg float-right" type="submit"
@@ -89,7 +93,7 @@
             </div> -->
 
             <div class="modal-footer">
-              <button mat-raised-button color="primary" type="submit" (click)="modal.close('Save click'); onSaveLecture($event)" class="btn-save">Save</button>
+              <button mat-raised-button color="primary" type="submit" (click)="modal.close('Save click'); onSaveWorkshop($event)" class="btn-save">Save</button>
             </div>
 
         <!-- <button class="btn btn-success btn-lg float-right" type="button">Login</button> -->
@@ -127,6 +131,9 @@
                   Date
                 </th>
                 <th>
+                  time
+                </th>
+                <th>
                   Status
                 </th>
                 <th>
@@ -154,6 +161,9 @@
                   </td>
                   <td>
                     {{ workshop.date.day}}/{{workshop.date.month}}/{{workshop.date.year}}
+                  </td>
+                  <td>
+                    {{ workshop.time }}
                   </td>
                   <td>
                     {{ workshop.status }}

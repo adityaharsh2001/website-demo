@@ -76,6 +76,9 @@ export class LecturesComponent implements OnInit {
         image: new FormControl(null, {
           validators: [Validators.required],
           asyncValidators: [mimeType]
+        }),
+        time: new FormControl(null, {
+          validators: [Validators.required, Validators.minLength(3)]
         })
       }
     )
@@ -123,7 +126,8 @@ export class LecturesComponent implements OnInit {
       "regLink": this.form.value.regLink,
       "status": this.status,
       "lectureTitle": this.form.value.lectureTitle,
-      "image": this.form.value.image
+      "image": this.form.value.image,
+      "time": this.form.value.time
     }
     // "imagePath": this.form.value.name
 
@@ -165,7 +169,8 @@ export class LecturesComponent implements OnInit {
             },
             status: lectureData.status,
             lectureTitle: lectureData.lectureTitle,
-            regLink: lectureData.regLink
+            regLink: lectureData.regLink,
+            time: lectureData.time
           };
           // console.log(this.lecture);
           this.imagePreview = this.lecture.imagePath;
@@ -177,6 +182,7 @@ export class LecturesComponent implements OnInit {
             date:this.lecture.date,
             regLink: this.lecture.regLink,
             image: this.lecture.imagePath,
+            time: this.lecture.time
           }
 
           );

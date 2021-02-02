@@ -10,9 +10,9 @@ export interface Workshop {
   regLink: string,
   status: string,
   price: string,
-  imagePath: string
+  imagePath: string,
+  time: string
 }
 
 
 
-// time: string,

@@ -11,6 +11,7 @@ export interface Lecture {
   },
   regLink: string
   imagePath: string,
+  time: string
 }
 
 // time: string,

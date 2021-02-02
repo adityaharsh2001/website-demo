@@ -74,6 +74,9 @@ export class CompetitionComponent implements OnInit {
         image: new FormControl(null, {
           validators: [Validators.required],
           asyncValidators: [mimeType]
+        }),
+        time: new FormControl(null, {
+          validators: [Validators.required, Validators.minLength(3)]
         })
       }
     )
@@ -120,7 +123,8 @@ export class CompetitionComponent implements OnInit {
       "date": this.form.value.date,
       "regLink": this.form.value.regLink,
       "status": this.status,
-      "image": this.form.value.image
+      "image": this.form.value.image,
+      "time":this.form.value.time
     }
     // "imagePath": this.form.value.name
 
@@ -162,7 +166,8 @@ export class CompetitionComponent implements OnInit {
             },
             status: this.status,
 
-            regLink: competitionData.regLink
+            regLink: competitionData.regLink,
+            time:competitionData.time
           };
           // console.log(this.lecture);
           this.imagePreview = this.competition.imagePath;
@@ -174,6 +179,7 @@ export class CompetitionComponent implements OnInit {
             date:this.competition.date,
             regLink: this.competition.regLink,
             image: this.competition.imagePath,
+            time: this.competition.time
           }
 
           );

@@ -28,7 +28,8 @@ export class CompetitionsService {
             imagePath: competition.imagePath,
             status: competition.status,
             date: competition.date,
-            regLink: competition.regLink
+            regLink: competition.regLink,
+            time: competition.time
           };
         });
       })
@@ -77,6 +78,8 @@ export class CompetitionsService {
     competitionData.append("year", competition.date.year);
     competitionData.append("month", competition.date.month);
     competitionData.append("day", competition.date.day);
+    competitionData.append("time", competition.time);
+
     // competitionData.append("imagePath", competition.image, competition.name);
 
 
@@ -114,6 +117,7 @@ export class CompetitionsService {
         CompetitionData.append("date", competition.date);
         CompetitionData.append("time", competition.time);
         CompetitionData.append("regLink", competition.regLink);
+
     }
     else {
         CompetitionData = {
@@ -123,7 +127,8 @@ export class CompetitionsService {
             imagePath: competition.imagePath,
             status: competition.status,
             date: competition.data,
-            regLink: competition.regLink
+            regLink: competition.regLink,
+            time: competition.time
           };
           // time: competition.time,
     }
