@@ -15,7 +15,7 @@ export class LecturesService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getLectures() {
-    this.http
+    return this.http
     .get<{ message: string; lectures: any }>("http://localhost:5000/api/lectures")
     .pipe(
       map(lectureData => {
@@ -78,12 +78,19 @@ export class LecturesService {
     lectureData.append("time", lecture.time);
 
     this.http
-      .post<{ message: string; lec: Lecture }>(
+      .post(
         "http://localhost:5000/api/lectures",
         lectureData
       )
-      .subscribe(responseData => {
-        // console.log(responseData);
+      .subscribe(temp => {
+
+        // console.log(responseData)
+        // console.log("dkfsa" );
+        console.log(temp["b"]);
+
+        this.lectures.push(temp["b"]);
+        this.lecturesUpdated.next([...this.lectures]);
+
     });
   }
 

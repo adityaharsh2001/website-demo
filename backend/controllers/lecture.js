@@ -74,7 +74,7 @@ exports.addLectures = async (req, res, next) => {
     // imagePath: result.public_id,
 
 
-      b = req.body
+      b = lecture
       await lecture.save().then(createdPost => {
         res.status(201).json({
           b

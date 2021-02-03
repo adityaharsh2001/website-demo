@@ -42,6 +42,7 @@ import { CompetitionComponent } from './pages/competition/competition.component'
 import { LoginComponent } from './pages/auth/login/login.component';
 
 import { AuthInterceptor } from "../app/pages/auth/auth-interceptor";
+import { AuthGuard } from "../app/pages/auth/auth.guard";
 
 @NgModule({
   declarations: [
@@ -84,7 +85,7 @@ import { AuthInterceptor } from "../app/pages/auth/auth-interceptor";
     NgxMatTimepickerModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -9,7 +9,7 @@ export interface Lecture {
     month: string,
     day:string
   },
-  regLink: string
+  regLink: string,
   imagePath: string,
   time: string
 }

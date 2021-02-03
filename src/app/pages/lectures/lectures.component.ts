@@ -83,7 +83,12 @@ export class LecturesComponent implements OnInit {
       }
     )
 
-    this.lecturesService.getLectures();
+    this.lecturesService.getLectures()
+    // .subscribe(transformedPosts => {
+    //     this.lectures = transformedPosts;
+    //     // console.log(this.lectures);
+    //     // this.lecturesUpdated.next([...this.lectures]);
+    //   });;
     this.lecturesSub = this.lecturesService.getLectureUpdateListener()
       .subscribe((lectures: Lecture[]) => {
         this.isLoading = false;
@@ -135,6 +140,7 @@ export class LecturesComponent implements OnInit {
       // console.log(this.form.value.date);
 
       this.lecturesService.addLecture(lecture,this.form.value.image);
+      
       this.isLoading = false;
     }
 
@@ -190,6 +196,6 @@ export class LecturesComponent implements OnInit {
 
   }
   ngOnDestroy() {
-    this.lecturesSub.unsubscribe();
+    // this.lecturesSub.unsubscribe();
   }
 }

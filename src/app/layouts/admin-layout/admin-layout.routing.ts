@@ -19,7 +19,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'workshop',        component: WorkshopComponent },
     { path: 'teams',        component: TeamsComponent },
     { path: 'sponsors',        component: SponsorsComponent },
-    { path: 'competition',        component: CompetitionComponent },
+    { path: 'competition',        component: CompetitionComponent  },
     // {path: 'login',                  component:LoginComponent}
 ];
 
