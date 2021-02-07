@@ -63,10 +63,10 @@ exports.addWorkshops = (req, res, next) => {
       time: req.body.time
     });
 
-      b = req.body
+      b = workshop
       workshop.save().then(createdWorkshop => {
         res.status(201).json({
-          message: "Workshop added successfully",
+
           b
         });
       });
@@ -122,8 +122,9 @@ exports.updateWorkshop = (req, res, next) =>{
     // console.log(req.body._id);
     // console.log(req.body);
     // console.log(req.params.id);
+    b = workshop
     Workshop.updateOne({ _id:req.params.id }, workshop).then(result => {
-      res.status(200).json({ message: "Update successful!" });
+      res.status(200).json({b});
     });
   }
 

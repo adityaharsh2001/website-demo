@@ -72,12 +72,17 @@ export class SponsorsService {
       // console.log(sponsor);
 
     this.http
-      .post<{ message: string; lec: Sponsor }>(
+      .post(
         "http://localhost:5000/api/sponsors",
         sponsorData
       )
-      .subscribe(responseData => {
+      .subscribe(temp => {
         // console.log(responseData);
+        console.log(temp["b"]);
+
+        this.sponsors.push(temp["b"]);
+        this.sponsorsUpdated.next([...this.sponsors]);
+
     });
   }
 
@@ -116,8 +121,18 @@ export class SponsorsService {
     }
     this.http
       .put("http://localhost:5000/api/sponsors/" + sponsor._id, SponsorData)
-      .subscribe(response => {
-        console.log(response);
+      .subscribe(temp => {
+        const updatedSponsor = [...this.sponsors];
+        const oldPostIndex = updatedSponsor.findIndex(p => p._id === sponsor._id);
+        // console.log(responseData)
+        // console.log("dkfsa" );
+        // console.log(temp["b"]);
+        // console.log(oldPostIndex);
+        // console.log(updatedLectures[oldPostIndex]);
+        updatedSponsor[oldPostIndex] = temp["b"];
+        this.sponsors = updatedSponsor;
+        // this.lectures.push(temp["b"]);
+        this.sponsorsUpdated.next([...this.sponsors]);
         }
 
       );

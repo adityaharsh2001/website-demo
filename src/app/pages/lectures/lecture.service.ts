@@ -139,9 +139,20 @@ export class LecturesService {
     }
     this.http
       .put("http://localhost:5000/api/lectures/" + lecture._id, LectureData)
-      .subscribe(response => {
-        console.log(response);
-        }
+      .subscribe(temp => {
+
+        const updatedLectures = [...this.lectures];
+        const oldPostIndex = updatedLectures.findIndex(p => p._id === lecture._id);
+        // console.log(responseData)
+        // console.log("dkfsa" );
+        // console.log(temp["b"]);
+        // console.log(oldPostIndex);
+        // console.log(updatedLectures[oldPostIndex]);
+        updatedLectures[oldPostIndex] = temp["b"];
+        this.lectures = updatedLectures;
+        // this.lectures.push(temp["b"]);
+        this.lecturesUpdated.next([...this.lectures]);
+      }
 
       );
   }

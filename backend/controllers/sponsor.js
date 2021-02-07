@@ -57,10 +57,10 @@ exports.addSponsor = (req, res, next) => {
       imagePath: url + "/images/sponsor/" + req.file.filename
     });
 
-      b = req.body
+      b = sponsor
       sponsor.save().then(createSponsor => {
         res.status(201).json({
-          message: "Sponsor added successfully",
+
           b
         });
       });
@@ -106,12 +106,13 @@ exports.updateSponsor = (req, res, next) =>{
       imagePath: url + "/images/sponsor/" + req.file.filename
     });
 
+    b = sponsor
     // console.log(sponsor);
     // console.log(req.body._id);
     // console.log(req.body);
     // console.log(req.params.id);
     Sponsor.updateOne({ _id:req.params.id }, sponsor).then(result => {
-      res.status(200).json({ message: "Update successful!" });
+      res.status(200).json({ b});
     });
   }
 

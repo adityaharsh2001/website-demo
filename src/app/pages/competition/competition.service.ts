@@ -86,12 +86,19 @@ export class CompetitionsService {
 // console.log(competition);
 
     this.http
-      .post<{ message: string; lec: Competition }>(
+      .post(
         "http://localhost:5000/api/competitions",
         competitionData
       )
-      .subscribe(responseData => {
-        // console.log(responseData);
+      .subscribe(temp => {
+
+        // console.log(responseData)
+        // console.log("dkfsa" );
+        console.log(temp["b"]);
+
+        this.competitions.push(temp["b"]);
+        this.competitionsUpdated.next([...this.competitions]);
+
     });
   }
 
@@ -114,7 +121,10 @@ export class CompetitionsService {
         CompetitionData.append("description", competition.description);
         CompetitionData.append("imagePath", competition.image, competition.name);
         CompetitionData.append("status", competition.status);
-        CompetitionData.append("date", competition.date);
+        // CompetitionData.append("date", competition.date);
+        CompetitionData.append("year", competition.date.year);
+        CompetitionData.append("month", competition.date.month);
+        CompetitionData.append("day", competition.date.day);
         CompetitionData.append("time", competition.time);
         CompetitionData.append("regLink", competition.regLink);
 
@@ -126,7 +136,12 @@ export class CompetitionsService {
             description: competition.description,
             imagePath: competition.imagePath,
             status: competition.status,
-            date: competition.data,
+            // date: competition.date,
+            date:{
+              day: competition.date.day,
+              year: competition.date.year,
+              month: competition.date.month
+            },
             regLink: competition.regLink,
             time: competition.time
           };
@@ -134,10 +149,19 @@ export class CompetitionsService {
     }
     this.http
       .put("http://localhost:5000/api/competitions/" + competition._id, CompetitionData)
-      .subscribe(response => {
-        console.log(response);
+      .subscribe(temp => {
+        const updatedCompetitions = [...this.competitions];
+        const oldPostIndex = updatedCompetitions.findIndex(p => p._id === competition._id);
+        // console.log(responseData)
+        // console.log("dkfsa" );
+        // console.log(temp["b"]);
+        // console.log(oldPostIndex);
+        // console.log(updatedLectures[oldPostIndex]);
+        updatedCompetitions[oldPostIndex] = temp["b"];
+        this.competitions = updatedCompetitions;
+        // this.lectures.push(temp["b"]);
+        this.competitionsUpdated.next([...this.competitions]);
         }
-
       );
   }
 

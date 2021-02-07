@@ -84,12 +84,19 @@ export class WorkshopsService {
 
 
     this.http
-      .post<{ message: string; lec: Workshop }>(
+      .post(
         "http://localhost:5000/api/workshops",
         workshopData
       )
-      .subscribe(responseData => {
-        // console.log(responseData);
+      .subscribe(temp => {
+
+        // console.log(responseData)
+        // console.log("dkfsa" );
+        console.log(temp["b"]);
+
+        this.workshops.push(temp["b"]);
+        this.workshopsUpdated.next([...this.workshops]);
+
     });
   }
 
@@ -112,7 +119,10 @@ export class WorkshopsService {
       WorkshopData.append("description", workshop.description);
       WorkshopData.append("imagePath", workshop.image, workshop.name);
       WorkshopData.append("price", workshop.price);
-      WorkshopData.append("date", workshop.date);
+      // WorkshopData.append("date", workshop.date);
+      WorkshopData.append("year", workshop.date.year);
+    WorkshopData.append("month", workshop.date.month);
+    WorkshopData.append("day", workshop.date.day);
       WorkshopData.append("time", workshop.time);
       WorkshopData.append("regLink", workshop.regLink);
 
@@ -124,7 +134,11 @@ export class WorkshopsService {
             description:workshop.description,
             imagePath:workshop.imagePath,
             price:workshop.price,
-            date:workshop.date,
+            date:{
+              day: workshop.date.day,
+              year: workshop.date.year,
+              month: workshop.date.month
+            },
             regLink:workshop.regLink,
             status:workshop.status,
             time: workshop.time
@@ -132,9 +146,21 @@ export class WorkshopsService {
     }
     this.http
       .put("http://localhost:5000/api/workshops/" + workshop._id, WorkshopData)
-      .subscribe(response => {
-        console.log(response);
-        }
+      .subscribe(temp => {
+
+        const updatedWorkshops = [...this.workshops];
+        const oldPostIndex = updatedWorkshops.findIndex(p => p._id === workshop._id);
+        // console.log(responseData)
+        // console.log("dkfsa" );
+        console.log(temp["b"]);
+        console.log(oldPostIndex);
+        console.log(updatedWorkshops[oldPostIndex]);
+        updatedWorkshops[oldPostIndex] = temp["b"];
+        this.workshops = updatedWorkshops;
+        // this.lectures.push(temp["b"]);
+        this.workshopsUpdated.next([...this.workshops]);
+      }
+
 
       );
   }

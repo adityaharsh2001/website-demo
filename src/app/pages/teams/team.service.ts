@@ -71,12 +71,17 @@ export class TeamsService {
 
 
     this.http
-      .post<{ message: string; lec: Team }>(
+      .post(
         "http://localhost:5000/api/teams",
         teamData
       )
-      .subscribe(responseData => {
+      .subscribe(temp => {
         // console.log(responseData);
+        console.log(temp["b"]);
+
+        this.teams.push(temp["b"]);
+        this.teamUpdated.next([...this.teams]);
+
     });
   }
 
@@ -115,8 +120,18 @@ export class TeamsService {
     }
     this.http
       .put("http://localhost:5000/api/teams/" + team._id, TeamData)
-      .subscribe(response => {
-        console.log(response);
+      .subscribe(temp => {
+        const updatedTeams = [...this.teams];
+        const oldPostIndex = updatedTeams.findIndex(p => p._id === team._id);
+        // console.log(responseData)
+        // console.log("dkfsa" );
+        // console.log(temp["b"]);
+        // console.log(oldPostIndex);
+        // console.log(updatedLectures[oldPostIndex]);
+        updatedTeams[oldPostIndex] = temp["b"];
+        this.teams = updatedTeams;
+        // this.lectures.push(temp["b"]);
+        this.teamUpdated.next([...this.teams]);
         }
 
       );

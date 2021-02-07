@@ -173,11 +173,11 @@ export class CompetitionComponent implements OnInit {
           };
           // console.log(this.lecture);
           this.imagePreview = this.competition.imagePath;
+          // status: this.competition.status,
           this.form.setValue(
           {
             title:this.competition.title,
             description: this.competition.description,
-            status: this.competition.status,
             date:this.competition.date,
             regLink: this.competition.regLink,
             image: this.competition.imagePath,

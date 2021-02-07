@@ -63,10 +63,9 @@ exports.addCompetition = (req, res, next) => {
       time: req.body.time
     });
 
-      b = req.body
+      b = competition
       competition.save().then(createCompetition => {
         res.status(201).json({
-          message: "Competition added successfully",
           b
         });
       });
@@ -103,7 +102,7 @@ exports.updateCompetiton = (req, res, next) =>{
       imagePath = url + "/images/competition/" + req.file.filename;
     }
     // competitonId = req.body._id;
-    const competiton = new Competiton({
+    const competiton = new Competition({
       _id: req.params.id,
       title: req.body.title,
       description: req.body.description,
@@ -117,10 +116,10 @@ exports.updateCompetiton = (req, res, next) =>{
       imagePath: url + "/images/competition/" + req.file.filename,
       time: req.body.time
     });
+    b = competiton
 
-
-    Competiton.updateOne({ _id:req.params.id }, competiton).then(result => {
-      res.status(200).json({ message: "Update successful!" });
+    Competition.updateOne({ _id:req.params.id }, competiton).then(result => {
+      res.status(200).json({b });
     });
   }
 

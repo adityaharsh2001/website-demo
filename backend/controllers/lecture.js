@@ -139,9 +139,10 @@ exports.updateLecture = (req, res, next) =>{
     // console.log(lecture);
     // console.log(req.body._id);
     // console.log(req.body);
+    b = lecture
     // console.log(req.params.id);
     Lecture.updateOne({ _id:req.params.id }, lecture).then(result => {
-      res.status(200).json({ message: "Update successful!" });
+      res.status(200).json({b});
     });
   }
 

@@ -59,10 +59,9 @@ exports.addTeam = (req, res, next) => {
       imagePath: url + "/images/team/" + req.file.filename
     });
 
-      b = req.body
+      b = team
       team.save().then(createTeam => {
         res.status(201).json({
-          message: "Team added successfully",
           b
         });
       });
@@ -117,8 +116,9 @@ exports.updateTeam = (req, res, next) =>{
     // console.log(req.body._id);
     // console.log(req.body);
     // console.log(req.params.id);
+    b = team
     Team.updateOne({ _id:req.params.id }, team).then(result => {
-      res.status(200).json({ message: "Update successful!" });
+      res.status(200).json({ b });
     });
   }
 
