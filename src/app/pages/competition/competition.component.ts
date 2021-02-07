@@ -126,18 +126,20 @@ export class CompetitionComponent implements OnInit {
       "image": this.form.value.image,
       "time":this.form.value.time
     }
-    // "imagePath": this.form.value.name
+
+
 
     if(this.mode === 'create' ){
-      // console.log(this.form.value.date);
 
       this.competitionsService.addCompetition(lecture,this.form.value.image);
       this.isLoading = false;
+      this.form.reset();
     }
 
     else{
       this.competitionsService.updateCompetition(lecture, this.form.value.image);
       this.isLoading  = false;
+      this.form.reset();
     }
     this.form.reset();
   }
